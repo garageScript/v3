@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+
+<style>
+.card {
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #aaa;
+  margin: 10px;
+  border-radius: 3px;
+  text-align:center;
+  float: left;
+}
+.card p{
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.imageContainer {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.upload-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed; bottom: 20px; right: 20px;
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+  border: 1px solid #aaa;
+}
+.upload-container.dropping {
+  background-color: #8f8;
+}
+.group {
+  text-align: center;
+  pointer-events: none;
+}
+</style>
+<h1>Files</h1>
+<label for="pathInput">Relative folder path: </label><input id="pathInput" type="text">
+<div class="fileListContainer">
+
+</div>
+<div class="upload-container">
+  <div class="group">
+  <h1>Drag Files Here</h1>
+  <h5>Files will be available at</h5>
+  <code>
+https://v3.amayz.dev/photos/uploads/filename
+  </code>
+  </div>
+</div>
+<script src="upload.js"></script>
+<script src="filemanager.js"></script>
