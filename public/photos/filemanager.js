@@ -5,16 +5,48 @@ function FileCard(parent, file, pathPrefix) {
   const container = document.createElement("div");
   container.classList.add("card");
   const img = IMAGE_EXTENSIONS.includes(file.ext)
-    ? `<img src="/${pathPrefix}/${file.name}"`
+    ? `<img src="/${pathPrefix}/${file.base}" />`
     : "";
   container.innerHTML = `
-    <p>${file.name}</p>
-    <div class="imageContainer">
-    ${img}
+    <div class="imageContainer"> ${img} </div>
+    <div class="inputContainer">
+      <input class="fileNameInput" type="text" value="${file.name}">
+      <button class="renameButton">Rename</button>
     </div>
+    <p>Please do not put extension. It is automatically inserted</p>
   `;
-
   parent.append(container);
+
+  const fileNameInput = container.querySelector(".fileNameInput");
+  const renameButton = container.querySelector(".renameButton");
+  renameButton.addEventListener("click", () => {
+    const newName = fileNameInput.value;
+    renameButton.innerText = "...";
+    fetch(`/files/rename`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        original: file.base,
+        newName: `${newName}${file.ext}`,
+        pathPrefix,
+      }),
+    })
+      .then((r) => {
+        return r.json();
+      })
+      .then((data) => {
+        alert("change successful");
+      })
+      .catch((err) => {
+        alert("There was an error");
+      })
+      .finally(() => {
+        renameButton.innerText = "Rename";
+      });
+    console.log("newName", newName);
+  });
 }
 
 (function () {

@@ -6,6 +6,7 @@ const multer = require("multer");
 const app = express();
 
 app.use(express.static("public"));
+app.use(express.json());
 app.use("/public", express.static("public"));
 
 const storage = multer.diskStorage({
@@ -23,13 +24,26 @@ app.post("/photos/uploads", upload.array("assets[]"), (req, res) => {
     success: true,
   });
 });
+app.post("/files/rename", (req, res) => {
+  console.log(req.body);
+  const pathPrefix = path.resolve(req.body.pathPrefix);
+  fs.rename(
+    `${pathPrefix}/${req.body.original}`,
+    `${pathPrefix}/${req.body.newName}`,
+    (error) => {
+      res.json({
+        error,
+        success: !error,
+      });
+    }
+  );
+});
 app.get("/files", (req, res) => {
   const absolutePath = path.resolve(req.query.path);
   fs.readdir(absolutePath, (err, fileNames) => {
     const files = fileNames.map((name) => {
       return {
-        name,
-        ext: path.extname(name),
+        ...path.parse(name),
       };
     });
     res.json({
