@@ -4,8 +4,9 @@ function FileCard(parent, file, pathPrefix) {
   console.log(pathPrefix);
   const container = document.createElement("div");
   container.classList.add("card");
+  const imgPath = `/${pathPrefix}/${file.base}`;
   const img = IMAGE_EXTENSIONS.includes(file.ext)
-    ? `<img src="/${pathPrefix}/${file.base}" />`
+    ? `<img src="${imgPath}" />`
     : "";
   container.innerHTML = `
     <div class="imageContainer"> ${img} </div>
@@ -16,6 +17,11 @@ function FileCard(parent, file, pathPrefix) {
     <p>Please do not put extension. It is automatically inserted</p>
   `;
   parent.append(container);
+
+  const img$ = container.querySelector("img");
+  img$.addEventListener("click", () => {
+    window.modal.showImage(imgPath);
+  });
 
   const fileNameInput = container.querySelector(".fileNameInput");
   const renameButton = container.querySelector(".renameButton");

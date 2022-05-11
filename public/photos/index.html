@@ -54,6 +54,23 @@ body {
   clear: both;
   padding-bottom: 500px;
 }
+#modal img {
+  max-width: 80%;
+}
+#modal.appear {
+  display: flex;
+}
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
 </style>
 <h1>Files</h1>
 <label for="pathInput">Relative folder path: </label><input id="pathInput" type="text">
@@ -68,5 +85,7 @@ https://v3.amayz.dev/photos/uploads/filename
   </code>
   </div>
 </div>
+<div id="modal"> <img class="imgContent" src="" alt=""/> </div>
 <script src="upload.js"></script>
+<script src="modal.js"></script>
 <script src="filemanager.js"></script>
