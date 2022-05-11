@@ -24,6 +24,12 @@ app.post("/photos/uploads", upload.array("assets[]"), (req, res) => {
     success: true,
   });
 });
+app.delete("/files", (req, res) => {
+  const { pathPrefix, name } = req.query;
+  fs.unlink(`${pathPrefix}/${name}`, (err) => {
+    res.json(req.query);
+  });
+});
 app.post("/files/rename", (req, res) => {
   console.log(req.body);
   const pathPrefix = path.resolve(req.body.pathPrefix);

@@ -9,6 +9,7 @@ function FileCard(parent, file, pathPrefix) {
     ? `<img src="${imgPath}" />`
     : "";
   container.innerHTML = `
+    <div class="deleteButton">X</div>
     <div class="imageContainer"> ${img} </div>
     <div class="inputContainer">
       <input class="fileNameInput" type="text" value="${file.name}">
@@ -21,6 +22,25 @@ function FileCard(parent, file, pathPrefix) {
   const img$ = container.querySelector("img");
   img$.addEventListener("click", () => {
     window.modal.showImage(imgPath);
+  });
+
+  const delete$ = container.querySelector(".deleteButton");
+  delete$.addEventListener("click", () => {
+    fetch(`/files?pathPrefix=${pathPrefix}&name=${file.base}`, {
+      method: "DELETE",
+    })
+      .then((r) => {
+        return r.json();
+      })
+      .then((data) => {
+        alert("change successful");
+      })
+      .catch((err) => {
+        alert("There was an error");
+      })
+      .finally(() => {
+        container.remove();
+      });
   });
 
   const fileNameInput = container.querySelector(".fileNameInput");
