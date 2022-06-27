@@ -3,12 +3,14 @@ const path = require("path");
 const ejs = require("ejs");
 const fs = require("fs");
 const multer = require("multer");
-
 const Markdoc = require("@markdoc/markdoc");
+
+const { getGraphs } = require("./src/mermaidGraphs");
 
 const app = express();
 
 let myIp = `69.181.248.93`;
+
 /*
 fetch("https://ifconfig.me/all.json")
   .then((r) => r.json())
@@ -84,6 +86,7 @@ app.get("/files", (req, res) => {
 app.get(["/", "/:article"], (req, res) => {
   const reqIp = getReqIp(req);
   const hostname = req.hostname.trim();
+
   const articleName =
     hostname === myIp
       ? "ip-request-response-example"
@@ -98,6 +101,8 @@ app.get(["/", "/:article"], (req, res) => {
     }
     const doc = ejs.render(file.toString(), {
       reqIp,
+      ipUrl,
+      graphs: getGraphs(articleName, { reqIp }),
     });
     const ast = Markdoc.parse(doc);
     const content = Markdoc.transform(ast);

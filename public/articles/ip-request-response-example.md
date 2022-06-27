@@ -1,5 +1,5 @@
 # What's just happened!?
-What happened when you put a **url** (i.e ${ipUrl}) into the url bar and hit "enter"?
+What happened when you put a **url** (i.e `<%= ipUrl %>`) into the url bar and hit "enter"?
 
 1. The browser sends out a request.
 

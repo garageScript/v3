@@ -73,7 +73,7 @@ Your external IP address is: `<%= reqIp %>`
 
 So you go to a website like [youtube.com](https://www.youtube.com/)
 
-[![](https://mermaid.ink/img/pako:eNpFj8FKA0EMhl8l5FShFepxDoK79lBQkPYkjoe4E93Bzswyk6GVtu9utl0xp_DzfT_JEbvkGA1-ZRp6eNrYCDoPb6-pZmhTGKpwfofF4h6a2bOy4eaKNGN2Wt7ClqMrQLD30kNRrWMDF311UDfSDtYvJ2hnmkn94MlvL_7dv7_hMqRY-FrkuIiPJD7FqW0saXCOgXMg7_Tm49hkUXoObNHo6ih_W7TxrFwdHAmvnJeU0XzSrvAcqUra_sQOjeTKf9CjJ_0_TNT5F8JmWsg)](https://mermaid.live/edit#pako:eNpFj8FKA0EMhl8l5FShFepxDoK79lBQkPYkjoe4E93Bzswyk6GVtu9utl0xp_DzfT_JEbvkGA1-ZRp6eNrYCDoPb6-pZmhTGKpwfofF4h6a2bOy4eaKNGN2Wt7ClqMrQLD30kNRrWMDF311UDfSDtYvJ2hnmkn94MlvL_7dv7_hMqRY-FrkuIiPJD7FqW0saXCOgXMg7_Tm49hkUXoObNHo6ih_W7TxrFwdHAmvnJeU0XzSrvAcqUra_sQOjeTKf9CjJ_0_TNT5F8JmWsg)
+[![](https://mermaid.ink/img/pako:<%=graphs[0]%>)](https://mermaid.live/edit#pako:<%=graphs[0]%>)
 
 Your request will contain your external ip address. This way, when youtube receives a request, youtube will know to send back the response to the requestor's external ip address.
 
