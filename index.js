@@ -7,6 +7,10 @@ const Markdoc = require("@markdoc/markdoc");
 
 const app = express();
 
+const myIp = `69.181.248.93`;
+const myPort = `8035`;
+const ipUrl = `${myIp}:${myPort}`;
+
 app.use(express.static("public"));
 app.use(express.json());
 app.use("/public", express.static("public"));
@@ -22,7 +26,7 @@ app.get("/", (req, res) => {
     }
     </style>
     <h1>Please Go To</h1>
-    <code>69.181.248.93:8035</code>
+    <code>${ipUrl}</code>
     <hr>
     
     <p>
@@ -33,7 +37,20 @@ app.get("/", (req, res) => {
     `);
   }
   const doc = `
-# Hello world.
+# What's just happened!?
+What happened when you put a **url** (i.e ${ipUrl}) into the url bar and hit "enter"?
+
+1. The browser sends out a request.
+
+[![](https://mermaid.ink/img/pako:eNpNzj8LwjAQBfCvctyk0Ao6dhBaddOlncQ4hObUoknqJUFK2-9u_Afe9Ibf412PtVWEGZ5ZthfYlsJAvPywt4GhYPtwxEdI0-Uwn0FFRjmQUNI9kPMDFJNdByur2-CJp59u8daLf-1aaxwNkGOCmljLRsXJ_uUF-gtpEpjFqCRfBQozRhdaJT1tVOMtY3aSN0cJyuBt1ZkaM8-BfmjdyPi-_qrxCR-SRbA)](https://mermaid.live/edit#pako:eNpNzj8LwjAQBfCvctyk0Ao6dhBaddOlncQ4hObUoknqJUFK2-9u_Afe9Ibf412PtVWEGZ5ZthfYlsJAvPywt4GhYPtwxEdI0-Uwn0FFRjmQUNI9kPMDFJNdByur2-CJp59u8daLf-1aaxwNkGOCmljLRsXJ_uUF-gtpEpjFqCRfBQozRhdaJT1tVOMtY3aSN0cJyuBt1ZkaM8-BfmjdyPi-_qrxCR-SRbA)
+
+The short explanation is that your browser sent a request to my computer. My computer sent back a response back to your browser. You browser then displays the content in the response, allowing you to read this page.
+
+The most important part of the url is the **hostname**, which tells the browser where to send the request.
+
+
+
+1. When I signed up for internet with my internet service provider (ISP), they gave me an ip address: ${myIp}. When your browser sent a request
   > My first Markdoc page
 `;
 
@@ -102,21 +119,30 @@ app.get("/files", (req, res) => {
 });
 
 app.get("/:article", (req, res) => {
-  const doc = `
-# Hello world.
-  > My first Markdoc page
-`;
+  const articlePath = path.resolve(
+    `./public/articles/${req.params.article}.md`
+  );
+  console.log("getting article", articlePath);
+  fs.readFile(articlePath, (err, file) => {
+    if (err) {
+      return res.json({
+        error: err,
+        articlePath,
+      });
+    }
+    const doc = file.toString();
+    console.log(doc);
+    const ast = Markdoc.parse(doc);
 
-  const ast = Markdoc.parse(doc);
+    const content = Markdoc.transform(ast);
 
-  const content = Markdoc.transform(ast);
-
-  const html = Markdoc.renderers.html(content);
-  res.send(`
+    const html = Markdoc.renderers.html(content);
+    res.send(`
 <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
   ${html}
   `);
+  });
 });
 
 app.get("/:article/edit", (req, res) => {
