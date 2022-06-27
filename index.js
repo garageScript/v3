@@ -83,6 +83,8 @@ app.get("/files", (req, res) => {
   });
 });
 
+const exampleLocalIp = "192.168.1.23";
+
 app.get(["/", "/:article"], (req, res) => {
   const reqIp = getReqIp(req);
   const hostname = req.hostname.trim();
@@ -102,7 +104,10 @@ app.get(["/", "/:article"], (req, res) => {
     const doc = ejs.render(file.toString(), {
       reqIp,
       ipUrl,
-      graphs: getGraphs(articleName, { reqIp }),
+      myIp,
+      exampleLocalIp,
+      externalPort,
+      graphs: getGraphs(articleName, { reqIp, destIp: myIp, exampleLocalIp }),
     });
     const ast = Markdoc.parse(doc);
     const content = Markdoc.transform(ast);
@@ -110,7 +115,18 @@ app.get(["/", "/:article"], (req, res) => {
     res.send(`
 <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/androidstudio.min.css" integrity="sha512-1XN5rnQ4rhaGEfX3nlDJ4Hb7kKNMAi0+DWQ/cNf54tuuTGSs0Wyw6mbgzVxLUCQ+vxSpmzr4j87ROim2ChrYnA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   ${html}
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>
+<script>
+console.log('hi')
+document.querySelectorAll('pre').forEach((el) => {
+  el.classList.add('language-js');
+  hljs.highlightElement(el);
+});
+</script>
   `);
   });
 });
