@@ -87,7 +87,8 @@ const exampleLocalIp = "192.168.1.23";
 
 app.get(["/", "/:article"], (req, res) => {
   const reqIp = getReqIp(req);
-  const hostname = req.hostname.trim();
+  console.log("hostname?", req.hostname);
+  const hostname = (req.hostname || "").trim();
 
   const articleName =
     hostname === myIp
