@@ -110,8 +110,21 @@ app.get(["/", "/:article"], (req, res) => {
       externalPort,
       graphs: getGraphs(articleName, { reqIp, destIp: myIp, exampleLocalIp }),
     });
+
+    let variables = {
+      ipUrl,
+      myIp,
+      reqIp,
+      exampleLocalIp,
+      externalPort,
+    };
+    console.log("putting variables", {
+      variables,
+    });
     const ast = Markdoc.parse(doc);
-    const content = Markdoc.transform(ast);
+    const content = Markdoc.transform(ast, {
+      variables,
+    });
     const html = Markdoc.renderers.html(content);
     res.send(`
 <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
