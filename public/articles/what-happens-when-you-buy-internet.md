@@ -69,11 +69,16 @@ How do you know who to send the response back to?
 The answer is **public ip address** (also known as **external ip address**). 
 When you sign up for internet service with your ISP, they will assign you an **external ip address**.
 All request and responses with your ip address will be sent to your cable, which ends up in your modem and to your computer.
-Your external IP address is: `<%= reqIp %>`
+Your external IP address is: *{% $reqIp %}*
 
 So you go to a website like [youtube.com](https://www.youtube.com/)
 
-[![](https://mermaid.ink/img/pako:<%=graphs[0]%>)](https://mermaid.live/edit#pako:<%=graphs[0]%>)
+{% mermaid %}
+graph LR
+A[Your Computer] --> B(Modem)
+B -->|1. Sends a Request with source: {% $reqIp %}| C(Youtube)
+C -->|2. Sends a Response with destination: {% $reqIp %} | B
+{% /mermaid %}
 
 Your request will contain your external ip address. This way, when youtube receives a request, youtube will know to send back the response to the requestor's external ip address.
 

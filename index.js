@@ -1,13 +1,7 @@
-const express = require("express");
-const path = require("path");
-const ejs = require("ejs");
-const fs = require("fs");
-const React = require("react");
-const ReactDOMServer = require("react-dom/server");
-const multer = require("multer");
-const Markdoc = require("@markdoc/markdoc");
-
-const { getGraphs } = require("./src/mermaidGraphs");
+import express from "express";
+import path from "path";
+import fs from "fs";
+import multer from "multer";
 
 const app = express();
 
@@ -29,6 +23,7 @@ const getReqIp = (req) => {
   return initialIp.replace("::ffff:", "");
 };
 
+app.use(express.static("dist"));
 app.use(express.static("public"));
 app.use(express.json());
 app.use("/public", express.static("public"));
@@ -96,56 +91,29 @@ app.get(["/", "/:article"], (req, res) => {
     hostname === myIp
       ? "ip-request-response-example"
       : req.params.article || "what-happens-when-you-buy-internet";
-  const articlePath = path.resolve(`./public/articles/${articleName}.md`);
-  fs.readFile(articlePath, (err, file) => {
-    if (err) {
-      return res.json({
-        error: err,
-        articlePath,
-      });
-    }
-    const doc = ejs.render(file.toString(), {
-      reqIp,
-      ipUrl,
-      myIp,
-      exampleLocalIp,
-      externalPort,
-      graphs: getGraphs(articleName, { reqIp, destIp: myIp, exampleLocalIp }),
-    });
 
-    let variables = {
-      ipUrl,
-      myIp,
-      reqIp,
-      exampleLocalIp,
-      externalPort,
-    };
-    console.log("putting variables", {
-      variables,
-    });
-    const ast = Markdoc.parse(doc);
-    const content = Markdoc.transform(ast, {
-      variables,
-    });
-    const children = Markdoc.renderers.react(content, React);
+  let variables = {
+    ipUrl,
+    myIp,
+    reqIp,
+    exampleLocalIp,
+    externalPort,
+  };
 
-    res.send(`
+  res.send(`
 <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/androidstudio.min.css" integrity="sha512-1XN5rnQ4rhaGEfX3nlDJ4Hb7kKNMAi0+DWQ/cNf54tuuTGSs0Wyw6mbgzVxLUCQ+vxSpmzr4j87ROim2ChrYnA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  ${ReactDOMServer.renderToString(children)}
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>
+<link rel="stylesheet" href="/main.css">
+
+<div id="root"></div>
+
 <script>
-console.log('hi')
-document.querySelectorAll('pre').forEach((el) => {
-  el.classList.add('language-js');
-  hljs.highlightElement(el);
-});
+const markdocVariableString = '${JSON.stringify(variables)}'
+const mdContentPath = '/articles/${articleName}.md'
 </script>
+
+<script src="/main.js"></script>
   `);
-  });
 });
 
 app.listen(process.env.PORT || 8123);

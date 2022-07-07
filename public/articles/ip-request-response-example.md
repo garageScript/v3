@@ -11,12 +11,19 @@ This is the external ip address given to me when I signed up for internet servic
 
 Your External Ip is: *{% $reqIp %}* and let's assume your local IP is *{% $exampleLocalIp %}*.
 
-<%= graphs[0] %>
+{% mermaid %}
+graph LR
+A[1. Your Browser, localIP {% $exampleLocalIp %}] --> B[2. Router]
+B --> C[3. Modem IP {% $reqIp %}]
+C --> |Sends a Request| D[The Internet]
+D --> |request| E(3. My Modem IP {% $myIp %})
+E --> F[4. Router]
+{% /mermaid %}
 
 1. When you typed *{% $ipUrl %}* into the browser, a request is sent, first to the router.
 2. The router will take note of your local IP *{% $exampleLocalIp %}* and the url you are sending the request to (*{% $ipUrl %}*). This way, when you receive a response back, the router will know to send the response to your device instead of another device.
-3. The request goes out the modem, into the internet, and eventually ends up in my home and into the modem because of the hostname (*{% $myIp %}*)
-4. Since the modem is connected to the router, the request goes into the router
+3. The request goes out the modem, into the internet, and eventually ends up in my home and into my modem because of the hostname (*{% $myIp %}*)
+4. Since my modem is connected to my router, the request goes into my router
 
 Normally, your request would die there because the router does not know which one of my device it should send the request to.
 
@@ -26,7 +33,12 @@ To make sure my computer receives incoming request from the router, I went to th
 
 This is telling the router that whenever the router receives a request on port *{% $externalPort %}*, forward the request to `192.168.0.21` on port 3035. `192.168.0.21` is a **static local ip address** I configured on my router for my computer.
 
-<%= graphs[1] %>
+{% mermaid %}
+graph LR
+D[The Internet] --> |request| E(My Modem IP {% $myIp %})
+E -->F[4. Router]
+F -->G[5. My Computer]
+{% /mermaid %}
 
 Because of port forwarding, the router will look at the request port number (*{% $externalPort %}*) and forwards the request to `192.168.0.21:3035`
 
