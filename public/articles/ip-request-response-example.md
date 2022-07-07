@@ -39,17 +39,19 @@ You can build
 ```js
 const http = require("http");
 
+const htmlString = `
+  <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+  <article>
+  <h1>What's just happened!?</h1>
+  <p>What happened when you put a <strong>url</strong> (i.e <code>69.181.248.93:8035</code>) into the url bar and hit &quot;enter&quot;?</p>
+  <h2>Receiving Your Request on Device</h2>
+  ...
+  </article>
+`
+
 const requestListener = function (req, res) {
-  return res.send(`
-      <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
-      <article>
-      <h1>What's just happened!?</h1>
-      <p>What happened when you put a <strong>url</strong> (i.e <code>69.181.248.93:8035</code>) into the url bar and hit &quot;enter&quot;?</p>
-      <h2>Receiving Your Request on Device</h2>
-      ...
-      </article>
-  `)
+  res.send(htmlString)
 };
 
 const server = http.createServer(requestListener);
