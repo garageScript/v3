@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const ejs = require("ejs");
 const fs = require("fs");
+const React = require("react");
+const ReactDOMServer = require("react-dom/server");
 const multer = require("multer");
 const Markdoc = require("@markdoc/markdoc");
 
@@ -125,13 +127,14 @@ app.get(["/", "/:article"], (req, res) => {
     const content = Markdoc.transform(ast, {
       variables,
     });
-    const html = Markdoc.renderers.html(content);
+    const children = Markdoc.renderers.react(content, React);
+
     res.send(`
 <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/androidstudio.min.css" integrity="sha512-1XN5rnQ4rhaGEfX3nlDJ4Hb7kKNMAi0+DWQ/cNf54tuuTGSs0Wyw6mbgzVxLUCQ+vxSpmzr4j87ROim2ChrYnA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  ${html}
+  ${ReactDOMServer.renderToString(children)}
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>
 <script>
