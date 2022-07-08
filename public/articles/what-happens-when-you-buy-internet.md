@@ -41,8 +41,8 @@ So, 8 megabits/s (aka 8mbps) is actually 1 megaBytes/s (1 mBps)
 > What do you call 8 hobbits?   
 A Hobbyte
 
-Let's say you picked a plan that provides 80mbps. How long will it take to download a 50 megabyte file?   
-80 mbps is 10 megabytes per second, so it will take 5 seconds to download a 50 megabyte file.
+{% exercise exerciseId="ispSpeed" articleName=$articleName %}
+{% /exercise %}
 
 If you are sharing the internet with 5 roommates and every day at 8pm all of you watch your favorite shows on your own computer.  When you watch a video in 1080p, you use [5 megabits / second](https://help.netflix.com/en/node/306). What is the minimum download speed you need to make sure everyone is happy?
 

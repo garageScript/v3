@@ -3,6 +3,8 @@ import path from "path";
 import fs from "fs";
 import multer from "multer";
 
+import exerciseStringList from "./public/exercises/index.cjs";
+
 const app = express();
 
 let myIp = `69.181.248.93`;
@@ -98,6 +100,7 @@ app.get(["/", "/:article"], (req, res) => {
     reqIp,
     exampleLocalIp,
     externalPort,
+    articleName,
   };
 
   res.send(`
@@ -110,6 +113,8 @@ app.get(["/", "/:article"], (req, res) => {
 <script>
 const markdocVariableString = '${JSON.stringify(variables)}'
 const mdContentPath = '/articles/${articleName}.md'
+
+const markdocExercises = ${exerciseStringList[articleName]};
 </script>
 
 <script src="/main.js"></script>

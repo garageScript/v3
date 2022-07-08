@@ -4,6 +4,7 @@ import React from "react";
 
 import { CodeBlock, fence } from "./components/Markdoc/Fence.js";
 import { Mermaid, mermaid } from "./components/Markdoc/Mermaid.js";
+import { Exercise, exercise } from "./components/Markdoc/Exercise.js";
 
 const markdocVariables = JSON.parse(markdocVariableString);
 
@@ -19,12 +20,14 @@ fetch(mdContentPath)
       },
       tags: {
         mermaid,
+        exercise,
       },
     });
     const children = Markdoc.renderers.react(content, React, {
       components: {
         CodeBlock,
         Mermaid,
+        Exercise,
       },
     });
 
