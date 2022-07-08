@@ -9,6 +9,24 @@ export const exerciseStat = {
     return exerciseInfo.correctCount || 0;
   },
 
+  hasNotCompleted: (articleName, exerciseId) => {
+    const articleExerciseStat = exerciseData[articleName] || {};
+    const exerciseInfo = articleExerciseStat[exerciseId] || {};
+
+    return !exerciseInfo.isComplete;
+  },
+
+  completeExercise: (articleName, exerciseId) => {
+    const articleExerciseStat = exerciseData[articleName] || {};
+    const exerciseInfo = articleExerciseStat[exerciseId] || {};
+
+    exerciseInfo.isComplete = true;
+    articleExerciseStat[exerciseId] = exerciseInfo;
+    exerciseData[articleName] = articleExerciseStat;
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(exerciseData));
+  },
+
   increaseCorrectCount: (articleName, exerciseId) => {
     const articleExerciseStat = exerciseData[articleName] || {};
     const exerciseInfo = articleExerciseStat[exerciseId] || {};

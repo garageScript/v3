@@ -70,6 +70,15 @@ const ResultMessage = ({ result }) => {
   return <p>{resultMessage}</p>;
 };
 
+const Completed = ({ dismiss }) => {
+  return (
+    <>
+      <h1>Congratulations!</h1>
+      <a onClick={dismiss}>Dismiss</a>
+    </>
+  );
+};
+
 export function Exercise({ exerciseId, articleName, children }) {
   const inputRef = useRef(null);
   const [result, setResult] = useState(null);
@@ -95,6 +104,19 @@ export function Exercise({ exerciseId, articleName, children }) {
     explanation,
     requiredCorrect,
   } = question;
+
+  if (
+    exerciseStat.getCorrectCount(articleName, exerciseId) === requiredCorrect &&
+    exerciseStat.hasNotCompleted(articleName, exerciseId)
+  ) {
+    const dismiss = () => {
+      exerciseStat.completeExercise(articleName, exerciseId);
+      setCount(count + 1);
+      setResult(null);
+      setViewedSolution(false);
+    };
+    return <Completed dismiss={dismiss} />;
+  }
 
   const handleClick = () => {
     if (viewedSolution) {
