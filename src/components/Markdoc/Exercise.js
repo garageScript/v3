@@ -102,7 +102,7 @@ const Completed = ({ dismiss }) => {
 export function Exercise({ exerciseId, articleName, children }) {
   const inputRef = useRef(null);
   const [result, setResult] = useState(null);
-  const [question, setQuestion] = useState(null);
+  const [question, setQuestion] = useState({});
   const [count, setCount] = useState(0);
   const [viewedSolution, setViewedSolution] = useState(null);
 
@@ -112,18 +112,36 @@ export function Exercise({ exerciseId, articleName, children }) {
     setQuestion(generateQuestion());
   }, [count]);
 
-  if (!question) {
-    return "No Question";
-  }
-
   const {
     title,
-    prompt,
+    prompt = "",
     answerUnit,
     validate,
     explanation,
     requiredCorrect,
   } = question;
+
+  const promptComponent = useMemo(() => {
+    const ast = Markdoc.parse(prompt);
+    const content = Markdoc.transform(ast, {
+      nodes: {
+        fence,
+      },
+      tags: {
+        mermaid,
+      },
+    });
+    return Markdoc.renderers.react(content, React, {
+      components: {
+        CodeBlock,
+        Mermaid,
+      },
+    });
+  }, [prompt]);
+
+  if (!prompt) {
+    return "No Question";
+  }
 
   if (
     exerciseStat.getCorrectCount(articleName, exerciseId) === requiredCorrect &&
@@ -164,7 +182,7 @@ export function Exercise({ exerciseId, articleName, children }) {
   return (
     <div>
       <p>{title}</p>
-      <p>{prompt}</p>
+      {promptComponent}
       <input type="text" ref={inputRef}></input>
       {answerUnit}
       <SubmitButton onClick={handleClick} viewedSolution={viewedSolution} />
