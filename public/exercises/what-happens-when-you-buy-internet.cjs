@@ -41,16 +41,18 @@
 
           return value >= resultMin && value <= resultMax
         },
-        explanation: [
-          `First, we need to make sure that the speed and file are using the same units.`,
-          `You can do that be either converting the speed to megabytes per second (${speed}/8 is ${speedBytes}) or converting file to megabits (${size} * 8 is ${sizeBits}). `,
-          `Let's go with ${speedBytes} MegaBytes per second.`,
-          `Now the question becomes, How many seconds does it take to download a ${size} megabyte file if your download speed is ${speedBytes} megabytes per second?`,
-          `To get the number of seconds, just divide the size by the speed`,
-          `${size} / ${speedBytes} is ${sampleAnswer} seconds`,
+        explanation: `
+First, we need to make sure that the speed and file are using the same units.,
 
-          `The answer is about ${sampleAnswer} seconds`
-        ],
+You can do that be either converting the speed to megabytes per second (${speed}/8 is ${speedBytes}) or converting file to megabits (${size} * 8 is *${sizeBits}*).
+
+Let's go with ${speedBytes} MegaBytes per second.
+Now the question becomes, How many seconds does it take to download a ${size} megabyte file if your download speed is ${speedBytes} megabytes per second?
+To get the number of seconds, just divide the size by the speed
+${size} / ${speedBytes} is ${sampleAnswer} seconds
+
+The answer is about ${sampleAnswer} seconds
+        `,
         requiredCorrect: 3
       };
     },

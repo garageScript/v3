@@ -1,6 +1,11 @@
 // https://markdoc.io/docs/tags#create-a-custom-tag
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
+import Markdoc from "@markdoc/markdoc";
+
 import { exerciseStat } from "../../lib/localStorage.js";
+
+import { CodeBlock, fence } from "./Fence.js";
+import { Mermaid, mermaid } from "./Mermaid.js";
 
 /* Design
  * Once user reveals solution, cannot submit anymore
@@ -37,6 +42,24 @@ const Requirement = ({ requiredCorrect, currentCorrect }) => {
 };
 
 const Solution = ({ explanation, viewed, viewSolution }) => {
+  const explanationComponent = useMemo(() => {
+    const ast = Markdoc.parse(explanation);
+    const content = Markdoc.transform(ast, {
+      nodes: {
+        fence,
+      },
+      tags: {
+        mermaid,
+      },
+    });
+    return Markdoc.renderers.react(content, React, {
+      components: {
+        CodeBlock,
+        Mermaid,
+      },
+    });
+  }, [explanation]);
+
   if (!viewed) {
     return (
       <p>
@@ -44,11 +67,8 @@ const Solution = ({ explanation, viewed, viewSolution }) => {
       </p>
     );
   }
-  const paragraphs = explanation.map((line) => {
-    return <p key={line}>{line}</p>;
-  });
 
-  return <>{paragraphs}</>;
+  return <>{explanationComponent}</>;
 };
 
 const SubmitButton = ({ onClick, viewedSolution }) => {
