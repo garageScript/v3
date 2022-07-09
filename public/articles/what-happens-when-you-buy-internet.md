@@ -1,47 +1,90 @@
 # Welcome
 
-Welcome! This curriculum will try to do 2 things:
+Dear student,
+
+My goal in writing this curriculum is:
 
 1. Help you understand the technology you are using 
 2. Teach you the things you need to know to become a software engineer.
 
-This course is designed to teach a beginner with no technical background the concepts and skills to be a software engineer. 
-Therefore, if you feel any parts are confusing or difficult, please let us know and we will try to make it easier to understand.
+This curriculum is designed to teach a beginner with no technical background. 
+From my previous teaching experience, I have learned that jumping straight into coding can be very difficult.
+Therefore, this curriculum will start by helping you understand the internet you use and introduce code to you along the way.
+Hopefully this will help you appreciate the engineering effort that goes into building the websites you use every day.
+
+These early chapters are extremely important because it is the foundation of how the internet works.
+I will start by helping you understand the steps you may have taken to get internet service 
+(most people blindly follow directions to setup their modems and routers without understanding what they are doing).
+
+Then I will explain what happens when you visit this site ({% $hostname %}).
+I will revisit this over and over again, each time going a little deeper. 
+In fact, the entirety of this curriculum is to teach you what happens when you visit a website, which covers many areas of engineering: front-end, back-end, fullstack, database, and infrastructure.
+
+If you don't understand something, there is a good chance many other students will struggle with the same question.
+So you feel any parts are confusing or difficult, please let me know and I will try to make it easier to understand. 
+
+With your help, I want to constantly improve this curriculum and make it better for the next student.
+
+Amay
 
 # Getting internet
 
-Since you are here, obviously you have internet. 
-Let's first imagine you didn't have internet access and you need to set it up. What do you need to do?
+Since you are here, obviously you have internet. Let's first make sure you and I are on the same page on what internet means.
+
+To me, being connected to the internet means that my computer can talk to any other device also connected to the internet. 
+
+But how?
+
+Just like how you can send me mail (letter or a package) if you know my address, your computer can send me a request to my computer if you know my internet address (aka **ip address**).
+
+Let's say you live in Bangladesh and you want to send me (San Francisco) a mail package. It will take a few days because your package need to be prepared, put on a plane, and then delivered by a truck to your door.
+
+![mail journey](https://v3.amayz.dev/public/photos/uploads/sf-bangladesh.png)
+
+In contrast, our internet world is connected by [a few hundred cables laid on the ocean floor](what-happens-when-you-buy-internet). 
+When your computer sends a request to my computer, the information goes through the cables and eventually end up in my computer.
+
+When you went to this site {% $hostname %}, your computer sent a request to my computer. 
+My computer sent you a response, which you are reading now. 
+
+**{% $roundTripTime %} seconds** {% .center %}
+
+The whole trip, your computer sending the request to my computer, my computer processing your request, and my computer sending a response back to you, took **{% $roundTripTime %} seconds** 
+
+{% mermaid %}
+graph LR
+A[Your Computer] -->|1. Sends a Request| B({% $hostname %} - My Computer)
+B -->|2. Sends a Response| A
+{% /mermaid %} 
+
+In the example above, your computer sent a request to my computer when you visited {% $hostname %}. 
+All websites work similarly. When you visit `google.com`, your computer is sending a request to a computer owned by Google.
+
+With this understanding of the internet, let's start by imagining that you do not have internet access and you need to set it up.
+What do you need to do? 
 
 ## Finding an ISP
 First, you need to find a internet service provider (ISP) that provides service in your area. What does it mean when a company provides service in your area?
 
-When you use the internet, all the data is largely sent through cables and wires. 
-In fact, our internet world is connected by [a few hundred cables laid on the ocean floor](what-happens-when-you-buy-internet). 
+As mentioned above, the internet world is connected by cables. 
 When a company says they provide service in your area, it means that they have a way to connect your home to these cables. 
 They may use an existing cable in your home or come to your house to install a new cable.
-Sometimes, instead of cables, they may need to install an antenna on your roof to give you internet wirelessly (Not very common)
 
-## Plan
-Once you have decided on an ISP, you need to decide on a plan that works for you! Internet plan has 2 important numbers: Upload and Download speeds. 
+Sometimes, instead of cables, they may need to install an antenna so they can beam internet information to you wirelessly (An example of this is Starlink, but this is not required knowledge for most engineering positions so we will ignore this)
 
-When you visited our website (**{% $hostname %}**), this is generally what happens:
-
-
-{% sideBySide %}
+## Upload and Download Speeds
+Once you have decided on an ISP, you need to decide on a plan that works for you! 
+Internet plan has 2 important numbers: Upload and Download speeds. 
 
 {% mermaid %}
 graph LR
-A[Your Browser] -->|1. Sends a Request| B({% $hostname %})
+A[Your Computer] -->|1. Sends a Request| B({% $hostname %} - My Computer)
 B -->|2. Sends a Response| A
 {% /mermaid %} 
 
-Your browser sends a request to {% $hostname %} and we send a response back to you
-{% /sideBySide %}
-
-The outgoing request is the upload and the incoming response is the download.
-   * **Upload Speed**: Most users will not need high upload speed but if you are a youtube content creator and constantly uploading videos, the requests your computer sends out will be big and you may need to consider picking a plan with higher upload speeds.
-   * **Download Speed**: If you watch alot of movies or download alot of files, the response you receive will be big and you may consider picking a plan with higher download speeds.
+In the example above
+* **Upload Speed** determines how quickly you send the request. If you are a youtube content creator and constantly uploading videos your computer will send big requests and you may need to consider picking a plan with higher upload speeds.
+* **Download Speed** determines how quickly you receive the response. If you watch alot of movies or download alot of files, your computer will receive big responses so you may consider picking a plan with higher download speeds.
 
 Most ISPs present upload and download speeds in terms of **bits**, but your computer displays file sizes in **bytes**. There are 8 bits in 1 byte. 
 
@@ -54,20 +97,40 @@ A Hobbyte
 {% /exercise %}
 
 ## Modem
-Once you have picked your ISP, picked a plan (download / upload speeds), your home now needs to be physically connected to the internet via a cable (or antenna) before you will be able to use the internet. 
+
+{% sideBySide %}
+
+Once you have picked your ISP, picked a plan (download / upload speeds), and paid your fees, 2 things will happen:
+1. Your home now needs to be physically connected to the internet via a cable before you will be able to use the internet. 
 If a cable aready exist, it can be reused. Otherwise, your ISP will send a technician to install a cable for you. Every request and response to and from the internet will go through this cable. 
+2. You will be assigned a **public ip address**. Any request sent to this ip address will be sent to this cable in your home
+
+---
 
 ![cable](https://v3.amayz.dev/public/photos/uploads/comcast-coaxial-cable.png)
+{% /sideBySide %}
 
-To connect your computer to the internet, you need a modem [like this one](https://www.bestbuy.com/site/arris-surfboard-32-x-8-docsis-3-0-cable-modem-white/). When buying a modem, make sure they can process the data faster than your internet speed! If your internet is 5 gigabits per second (gbps) but your modem is only 1 gigabit per second, then you will never see your internet speed go higher than 1 gigabit per second even though you are paying for 5 gbps plan.
 
+{% sideBySide %}
 ![modem back](https://v3.amayz.dev/public/photos/uploads/modem-outlet.png)
 
-Once you've plugged in a your modem to the power outlet, your internet cable to the modem, and your computer to the modem (via ethernet cable), your computer is now connected to the internet! All data will flow through the cable, processed by your modem, and sent to the ethernet cable (which your computer is connected to). You can now use the internet!
+To connect your computer to this internet cable, you need a modem [like this one](https://www.amazon.com/ARRIS-SURFboard-SB6183-Docsis-Packaging/dp/B00MA5U1FW/ref=asc_df_B00MA5U1FW/). 
 
-When you go to a website like [youtube.com](https://www.youtube.com/), this is what happens:
+You connect your cable and computer (through the ethernet cable) into the modem and you will be able to access the internet. 
 
-[![](https://mermaid.ink/img/pako:eNpNz00LwjAMBuC_EnJScIIedxDc9KYXdxLrIa7RFW07-yGI-t_tdII5hfC8IXlgbSVjjidHbQOrjTCQar7b2uigtLqNgd0esmwGxWCdrB5-SdHNnpMxVGykB4INXyP7ADdFUNPhwk8oB2lNiAfuM-UnM_3P-NYan2iBI9TsNCmZrnl0XmBoWLPAPLWS3FmgMK_kYisp8FKqYB3mR7p4HiHFYKu7qTEPLvIPLRSlz3SvXm_pl002)](https://mermaid.live/edit#pako:eNpNz00LwjAMBuC_EnJScIIedxDc9KYXdxLrIa7RFW07-yGI-t_tdII5hfC8IXlgbSVjjidHbQOrjTCQar7b2uigtLqNgd0esmwGxWCdrB5-SdHNnpMxVGykB4INXyP7ADdFUNPhwk8oB2lNiAfuM-UnM_3P-NYan2iBI9TsNCmZrnl0XmBoWLPAPLWS3FmgMK_kYisp8FKqYB3mR7p4HiHFYKu7qTEPLvIPLRSlz3SvXm_pl002)
+All requests to your ip address will flow through the cable, processed by your modem, and sent to your computer.
+{% /sideBySide %}
+
+When buying a modem, make sure they can process the data faster than your internet speed! If your internet is 5 gigabits per second but your modem is only 1 gigabit per second, you will never see your internet speed go higher than 1 gigabit per second even though you are paying for 5 gbps plan.
+
+When you visited our website (**{% $hostname %}**), this is what happens:
+
+{% mermaid %}
+graph LR
+A[Your Computer] --> B(Modem)
+B -->|1. Sends a Request via cable| C({% $hostname %})
+C -->|2. Sends a Response| B
+{% /mermaid %}
 
 Let's look at the above diagram from youtube's perspective.
 You are youtube, you are receiving millions of requests per second.

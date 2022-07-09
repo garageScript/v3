@@ -10,23 +10,23 @@ h1 {
   display: flex;
 }
 
-.flex.left {
+.equal-width.left {
   padding-right: 3rem;
   border-right: 1px solid var(--toc-border);
 }
 @media (prefers-color-scheme: dark) {
-  .flex.left {
+  .equal-width.left {
     border-right: 1px solid var(--toc-border-dark);
   }
 }
-.flex.right {
+.equal-width.right {
   padding-left: 3rem;
 }
-.flex.column {
+.equal-width.column {
   overflow: auto;
   padding-top: var(--default-vertical-spacing);
 }
-.flex.equal-width {
+.equal-width {
   width: 100%;
 }
 
@@ -47,3 +47,7 @@ h1 {
   }
 }
 /* End */
+
+.center {
+  text-align: center;
+}

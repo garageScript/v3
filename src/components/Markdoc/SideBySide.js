@@ -1,11 +1,20 @@
 import * as React from "react";
 
 export function SideBySide({ children }) {
-  const [first, ...rest] = React.Children.toArray(children);
+  const childrenArr = React.Children.toArray(children);
+  let [first, ...rest] = childrenArr;
+  const hrIndex = childrenArr.findIndex((e) => {
+    return e.type === "hr";
+  });
+  if (hrIndex >= 0) {
+    rest = childrenArr.splice(hrIndex);
+    rest.shift();
+    first = childrenArr;
+  }
   return (
     <div className="side-by-side flex row">
-      <div className="left flex column equal-width">{first}</div>
-      <div className="right flex column equal-width">{rest}</div>
+      <div className="left column equal-width">{first}</div>
+      <div className="right column equal-width">{rest}</div>
     </div>
   );
 }

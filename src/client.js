@@ -13,6 +13,10 @@ import { SideBySide, sideBySide } from "./components/Markdoc/SideBySide.js";
 
 const markdocVariables = JSON.parse(markdocVariableString);
 
+const currentTimeTS = Date.now();
+markdocVariables.roundTripTime =
+  (currentTimeTS - markdocVariables.serverTS) / 1000;
+
 // Fetch for content because content has HTML code snippets, can't find a way to put it into the HTML DOM
 fetch(mdContentPath)
   .then((r) => r.text())

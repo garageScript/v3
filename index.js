@@ -109,6 +109,7 @@ app.get(["/", "/:article"], (req, res) => {
     externalPort,
     articleName,
     hostname,
+    serverTS: Date.now(),
   };
 
   res.send(`
