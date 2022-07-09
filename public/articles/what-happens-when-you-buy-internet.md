@@ -25,26 +25,35 @@ Sometimes, instead of cables, they may need to install an antenna on your roof t
 ## Plan
 Once you have decided on an ISP, you need to decide on a plan that works for you! Internet plan has 2 important numbers: Upload and Download speeds. 
 
-When you visit a website (like [youtube](https://www.youtube.com/)), this is generally what happens:
+When you visited our website (**{% $hostname %}**), this is generally what happens:
 
-[![](https://mermaid.ink/img/pako:eNpNzrsKwkAQBdBfGaZSSAQttxAStLNKKnEtxuyoQXc37gORJP_u-gKnusW53OmxsYpR4MlRd4ZNJQ2kK3ZbGx2Uzt49uz3k-XKYz6BmozwQVHyL7MMA5SS5EA88_fTKt1z8S99Z43mAAjPU7DS1Ks31Ly8xnFmzRJGiIneRKM2YXOwUBV6rNliH4khXzxlSDLZ-mAZFcJF_aNVSel1_1fgEEoVEaA)](https://mermaid.live/edit#pako:eNpNzrsKwkAQBdBfGaZSSAQttxAStLNKKnEtxuyoQXc37gORJP_u-gKnusW53OmxsYpR4MlRd4ZNJQ2kK3ZbGx2Uzt49uz3k-XKYz6BmozwQVHyL7MMA5SS5EA88_fTKt1z8S99Z43mAAjPU7DS1Ks31Ly8xnFmzRJGiIneRKM2YXOwUBV6rNliH4khXzxlSDLZ-mAZFcJF_aNVSel1_1fgEEoVEaA)
 
-Your browser sends a request to the website you are going to and the website sends you back a response.
+{% table %}
+---
+* 
+  {% mermaid %}
+  graph LR
+  A[Your Browser] -->|1. Sends a Request| B({% $hostname %})
+  B -->|2. Sends a Response| A
+  {% /mermaid %} 
+*
+  Your browser sends a request to {% $hostname %} and we send a response back to you
+---
+{% /table %}
+
 The outgoing request is the upload and the incoming response is the download.
-   * Upload Speed: Most users will not need high upload speed but if you are a youtube content creator and constantly uploading a video to youtube, you will need to consider picking a plan with higher upload speeds.
-   * Download Speed: If you watch alot of movies or download alot of files, you obviously need a higher download speeds.
+   * **Upload Speed**: Most users will not need high upload speed but if you are a youtube content creator and constantly uploading videos, the requests your computer sends out will be big and you may need to consider picking a plan with higher upload speeds.
+   * **Download Speed**: If you watch alot of movies or download alot of files, the response you receive will be big and you may consider picking a plan with higher download speeds.
 
 Most ISPs present upload and download speeds in terms of **bits**, but your computer displays file sizes in **bytes**. There are 8 bits in 1 byte. 
 
-So, 8 megabits/s (aka 8mbps) is actually 1 megaBytes/s (1 mBps)
+So, 8 Megabits per second (aka 8Mbps) is actually 1 MegaByte per second (1 MBps)
 
 > What do you call 8 hobbits?   
 A Hobbyte
 
 {% exercise exerciseId="ispSpeed" articleName=$articleName %}
 {% /exercise %}
-
-If you are sharing the internet with 5 roommates and every day at 8pm all of you watch your favorite shows on your own computer.  When you watch a video in 1080p, you use [5 megabits / second](https://help.netflix.com/en/node/306). What is the minimum download speed you need to make sure everyone is happy?
 
 ## Modem
 Once you have picked your ISP, picked a plan (download / upload speeds), your home now needs to be physically connected to the internet via a cable (or antenna) before you will be able to use the internet. 
@@ -114,6 +123,9 @@ You can configure a **static ip address** for your device so that the router rem
 [![](https://mermaid.ink/img/pako:eNp1kU1PwzAMhv-K5Qub1FbrQAhyQNroQJyoNi5o4RAaQyNIUqUOEpr238k-kAAVn3x4nteWvcHGa0KBr0F1LTxU0kGq2ejRxwDX3naRKWRQXk6L8vyimBRlCTl8mN5wDwni-ExjyPMrqEZLv4PHh4jFeh9Rt97RL3_yNITfHPCl99YqJpid9NAMjZ8O6rf3f_z5f_7poD9f18G4PbtixaaBu1r81M6OmnSYoaVgldHpbJudLpFbsiRRpFar8CZRum3iYqfTLgtt2AcUL-q9pwxVZL_6dA0KDpG-ocqo9AJ7pLZfUPd6wg)](https://mermaid.live/edit#pako:eNp1kU1PwzAMhv-K5Qub1FbrQAhyQNroQJyoNi5o4RAaQyNIUqUOEpr238k-kAAVn3x4nteWvcHGa0KBr0F1LTxU0kGq2ejRxwDX3naRKWRQXk6L8vyimBRlCTl8mN5wDwni-ExjyPMrqEZLv4PHh4jFeh9Rt97RL3_yNITfHPCl99YqJpid9NAMjZ8O6rf3f_z5f_7poD9f18G4PbtixaaBu1r81M6OmnSYoaVgldHpbJudLpFbsiRRpFar8CZRum3iYqfTLgtt2AcUL-q9pwxVZL_6dA0KDpG-ocqo9AJ7pLZfUPd6wg)
 
 If you have a printer than you can connect to the router, it is a good idea to give it a static ip address so that you  don't have to re-setup your printer everytime when its local ip address change
+
+If you are sharing the internet with 5 roommates and every day at 8pm all of you watch your favorite shows on your own computer.  When you watch a video in 1080p, you use [5 megabits / second](https://help.netflix.com/en/node/306). What is the minimum download speed you need to make sure everyone is happy?
+
 
 ## LAN
 

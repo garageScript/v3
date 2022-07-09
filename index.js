@@ -86,7 +86,7 @@ const exampleLocalIp = "192.168.1.23";
 
 app.get(["/", "/:article"], (req, res) => {
   /*
-   * Source: https://stackoverflow.com/questions/38423930/how-to-retrieve-client-and-server-ip-address-and-port-number-in-node-js
+  // Source: https://stackoverflow.com/questions/38423930/how-to-retrieve-client-and-server-ip-address-and-port-number-in-node-js
   console.log("req.connection", req.connection.remoteAddress);
   console.log("req.connection", req.connection.remotePort);
   console.log("req.connection", req.connection.localAddress);
@@ -108,6 +108,7 @@ app.get(["/", "/:article"], (req, res) => {
     exampleLocalIp,
     externalPort,
     articleName,
+    hostname,
   };
 
   res.send(`
