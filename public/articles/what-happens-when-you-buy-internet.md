@@ -28,18 +28,16 @@ Once you have decided on an ISP, you need to decide on a plan that works for you
 When you visited our website (**{% $hostname %}**), this is generally what happens:
 
 
-{% table %}
----
-* 
-  {% mermaid %}
-  graph LR
-  A[Your Browser] -->|1. Sends a Request| B({% $hostname %})
-  B -->|2. Sends a Response| A
-  {% /mermaid %} 
-*
-  Your browser sends a request to {% $hostname %} and we send a response back to you
----
-{% /table %}
+{% sideBySide %}
+
+{% mermaid %}
+graph LR
+A[Your Browser] -->|1. Sends a Request| B({% $hostname %})
+B -->|2. Sends a Response| A
+{% /mermaid %} 
+
+Your browser sends a request to {% $hostname %} and we send a response back to you
+{% /sideBySide %}
 
 The outgoing request is the upload and the incoming response is the download.
    * **Upload Speed**: Most users will not need high upload speed but if you are a youtube content creator and constantly uploading videos, the requests your computer sends out will be big and you may need to consider picking a plan with higher upload speeds.
