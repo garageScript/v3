@@ -4,14 +4,14 @@ const LeftButton = ({ onClick, currentId, slides }) => {
   if (currentId <= 0) {
     return <div></div>;
   }
-  return <div onClick={onClick}>Left</div>;
+  return <div onClick={onClick}>Previous</div>;
 };
 
 const RightButton = ({ onClick, currentId, slides }) => {
   if (currentId >= slides.length - 1) {
     return <div></div>;
   }
-  return <div onClick={onClick}>Right</div>;
+  return <div onClick={onClick}>Next</div>;
 };
 
 export function SlideShow({ children }) {
@@ -33,6 +33,10 @@ export function SlideShow({ children }) {
         current.push(e);
       }
     });
+
+    if (current && current.length) {
+      allSlides.push(current);
+    }
 
     return allSlides;
   }, [children]);

@@ -39,8 +39,90 @@ Other common protocols (I'm only listing the common ones that you may be expecte
 Assuming that your computer is directly connected to the modem and my computer is directly connected to the modem.
 What happens after you typed **{% $myIp %}:{% $externalPort %}** into the url bar?
 
+First the browser adds the `http` protocol so the url becomes 
+
+**http://{% $myIp %}:{% $externalPort %}** {% .center %}
 
 
+{% slideShow %}
+
+# slide
+{% sideBySide %}
+
+{% mermaid %}
+graph LR
+A[Your Computer] -->|1. Prepares and sends a request| B(Modem)
+{% /mermaid %}
+
+---
+
+The protocol is `http` and the browser prepares a request to be sent out.
+As part of the http protocol, the request will contain 2 fields:
+1. Destination: Where the request is going to, which is my ip address: **{% $myIp %}:{% $externalPort %}**
+2. Source: Where the request is coming from, which is your ip address:  **{% $reqIp %}**
+{% /sideBySide %}
+
+# slide
+{% sideBySide %}
+
+{% mermaid %}
+graph LR
+A[Your Computer] --> B(Modem: {% $reqIp %})
+B -->|1. Sends a Request| C(The Internet)
+{% /mermaid %}
+
+---
+The request goes out of your modem into the internet
+
+{% /sideBySide %}
+
+# slide
+{% sideBySide %}
+
+{% mermaid %}
+graph LR
+A[The Internet] --> B(Modem: {% $myIp %})
+B -->|request| C(My Computer)
+{% /mermaid %}
+
+---
+Your request arrives to my modem, then my computer
+
+{% /sideBySide %}
+
+{% /slideShow %}
+
+In the next section, I will walk you through some code I wrote to handle your incoming request.
+
+# Code
+
+To write code, I created a folder and created a file inside the folder called `zombie` using a text editor.
+The most common editor used to write code currently is [vscode](https://code.visualstudio.com/)
+
+
+
+```js
+const http = require("http");
+
+const htmlString = `
+  <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+  <article>
+  <h1>What's just happened!?</h1>
+  <p>What happened when you put a <strong>url</strong> (i.e <code>69.181.248.93:8035</code>) into the url bar and hit &quot;enter&quot;?</p>
+  <h2>Receiving Your Request on Device</h2>
+  ...
+  </article>
+`
+
+const requestListener = function (req, res) {
+  res.send(htmlString)
+};
+
+const server = http.createServer(requestListener);
+
+server.listen(3035)
+```
 
 Now let's recap: When you visit **{% $hostname %}**, this happens:
 
@@ -51,25 +133,7 @@ B -->|1. Sends a Request| C({% $hostname %})
 C -->|2. Sends a Response| B
 {% /mermaid %}
 
-Let's look at the above diagram from youtube's perspective.
-You are youtube, you are receiving millions of requests per second.
-How do you know who to send the response back to?
 
-The answer is **public ip address** (also known as **external ip address**). 
-When you sign up for internet service with your ISP, they will assign you an **external ip address**.
-All request and responses with your ip address will be sent to your cable, which ends up in your modem and to your computer.
-Your external IP address is: *{% $reqIp %}*
-
-So you go to a website like [youtube.com](https://www.youtube.com/)
-
-{% mermaid %}
-graph LR
-A[Your Computer] --> B(Modem)
-B -->|1. Sends a Request with source: {% $reqIp %}| C(Youtube)
-C -->|2. Sends a Response with destination: {% $reqIp %} | B
-{% /mermaid %}
-
-Your request will contain your external ip address. This way, when youtube receives a request, youtube will know to send back the response to the requestor's external ip address.
 
 ## Router
 By connecting your computer to the modem directly, your computer is the ONLY device that can use your internet! What about your phone, tablets, other computers and other devices? For this reason, almost nobody would connect their computer directly to their modem. Instead, most people will buy a router [like this one](https://www.amazon.com/NETGEAR-4-Stream-WiFi-Router-R6700AX/dp/B08KTXG8Q5/) and connect their modem's ethernet to the router
@@ -131,9 +195,6 @@ In this lesson we covered the following terms
 
 We also covered the following concepts:
 * The request / response journey from your device to youtube (request), then back to your device (response)
-# What's just happened!?
-
-What happened when you put a **url** (i.e *{% $ipUrl %}*)  into the url bar and hit "enter"? **hi**
 
 ## Receiving Your Request on Device
 
@@ -181,26 +242,4 @@ My computer is going to be receiving requests on port `3035` so I need to create
 
 You can build 
 
-```js
-const http = require("http");
-
-const htmlString = `
-  <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
-  <article>
-  <h1>What's just happened!?</h1>
-  <p>What happened when you put a <strong>url</strong> (i.e <code>69.181.248.93:8035</code>) into the url bar and hit &quot;enter&quot;?</p>
-  <h2>Receiving Your Request on Device</h2>
-  ...
-  </article>
-`
-
-const requestListener = function (req, res) {
-  res.send(htmlString)
-};
-
-const server = http.createServer(requestListener);
-
-server.listen(3035)
-```
 
