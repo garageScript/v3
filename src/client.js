@@ -5,6 +5,7 @@ import React from "react";
 import { CodeBlock, fence } from "./components/Markdoc/Fence.js";
 import { Mermaid, mermaid } from "./components/Markdoc/Mermaid.js";
 import { Exercise, exercise } from "./components/Markdoc/Exercise.js";
+import { Heading, heading } from "./components/Markdoc/Heading.js";
 
 const markdocVariables = JSON.parse(markdocVariableString);
 
@@ -17,6 +18,7 @@ fetch(mdContentPath)
       variables: markdocVariables,
       nodes: {
         fence,
+        heading,
       },
       tags: {
         mermaid,
@@ -28,6 +30,7 @@ fetch(mdContentPath)
         CodeBlock,
         Mermaid,
         Exercise,
+        Heading,
       },
     });
 
