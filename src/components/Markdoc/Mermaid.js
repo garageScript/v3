@@ -12,7 +12,6 @@ export function Mermaid({ children }) {
     return acc + e;
   }, "");
 
-  console.log(str);
   const encodedStr = serialize(str);
   return (
     <a href={`https://mermaid.live/edit#pako:${encodedStr}`}>
