@@ -1,15 +1,16 @@
 import Markdoc from "@markdoc/markdoc";
-import { createRoot } from "react-dom/client";
 import React from "react";
+import { createRoot } from "react-dom/client";
 
 import "./css/variables.css";
 import "./css/app.css";
 
 import { CodeBlock, fence } from "./components/Markdoc/Fence.js";
-import { Mermaid, mermaid } from "./components/Markdoc/Mermaid.js";
 import { Exercise, exercise } from "./components/Markdoc/Exercise.js";
 import { Heading, heading } from "./components/Markdoc/Heading.js";
+import { Mermaid, mermaid } from "./components/Markdoc/Mermaid.js";
 import { SideBySide, sideBySide } from "./components/Markdoc/SideBySide.js";
+import { SlideShow, slideShow } from "./components/Markdoc/SlideShow.js";
 
 const markdocVariables = JSON.parse(markdocVariableString);
 
@@ -29,18 +30,20 @@ fetch(mdContentPath)
         heading,
       },
       tags: {
-        mermaid,
         exercise,
+        mermaid,
         sideBySide,
+        slideShow,
       },
     });
     const children = Markdoc.renderers.react(content, React, {
       components: {
         CodeBlock,
-        Mermaid,
         Exercise,
         Heading,
+        Mermaid,
         SideBySide,
+        SlideShow,
       },
     });
 
