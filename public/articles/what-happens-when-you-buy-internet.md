@@ -14,14 +14,14 @@ Hopefully this will help you appreciate the engineering effort that goes into bu
 
 These early chapters are extremely important because it is the foundation of how the internet works.
 I will start by helping you understand the steps you may have taken to get internet service 
-(most people blindly follow directions to setup their modems and routers without understanding what they are doing).
+(most people simply follow directions to setup their modems and routers without understanding what they are doing).
 
 Then I will explain what happens when you visit this site ({% $hostname %}).
 I will revisit this over and over again, each time going a little deeper. 
 In fact, the entirety of this curriculum is to teach you what happens when you visit a website, which covers many areas of engineering: front-end, back-end, fullstack, database, and infrastructure.
 
 If you don't understand something, there is a good chance many other students will struggle with the same question.
-So you feel any parts are confusing or difficult, please let me know and I will try to make it easier to understand. 
+If any parts are confusing or difficult, please let me know and I will try to make it easier to understand. 
 
 With your help, I want to constantly improve this curriculum and make it better for the next student.
 
@@ -37,12 +37,12 @@ But how?
 
 Just like how you can send me mail (letter or a package) if you know my address, your computer can send me a request to my computer if you know my internet address (aka **ip address**).
 
-Let's say you live in Bangladesh and you want to send me (San Francisco) a mail package. It will take a few days because your package need to be prepared, put on a plane, and then delivered by a truck to your door.
+Let's say you live in Bangladesh and you want to send me (San Francisco) a mail package. It will take a few days because your package needs to be prepared, put on a plane, and then delivered by a truck to my door.
 
 ![mail journey](https://v3.amayz.dev/public/photos/uploads/sf-bangladesh.png)
 
 In contrast, our internet world is connected by [a few hundred cables laid on the ocean floor](what-happens-when-you-buy-internet). 
-When your computer sends a request to my computer, the information goes through the cables and eventually end up in my computer.
+When your computer sends a request to my computer, the information goes through the cables and eventually ends up in my computer.
 
 When you went to this site {% $hostname %}, your computer sent a request to my computer. 
 My computer sent you a response, which you are reading now. 
@@ -66,7 +66,7 @@ What do you need to do?
 *FYI* Note that your specific internet setup may be different from the setup presented below, but the underlying concept is the same everywhere. Read through to the end and use the underlying knowledge to understand your own internet service.
 
 ## Finding an ISP
-First, you need to find a internet service provider (ISP) that provides service in your area. What does it mean when a company provides service in your area?
+First, you need to find an internet service provider (ISP) that provides service in your area. What does it mean when a company provides service in your area?
 
 As mentioned above, the internet world is connected by cables. 
 When a company says they provide service in your area, it means that they have a way to connect your home to these cables. 
@@ -85,8 +85,8 @@ B -->|2. Sends a Response| A
 {% /mermaid %} 
 
 In the example above
-* **Upload Speed** determines how quickly you send the request. If you are a youtube content creator and constantly uploading videos your computer will send big requests and you may need to consider picking a plan with higher upload speeds.
-* **Download Speed** determines how quickly you receive the response. If you watch alot of movies or download alot of files, your computer will receive big responses so you may consider picking a plan with higher download speeds.
+* **Upload Speed** determines how quickly you send the request. If you are a youtube content creator and constantly uploading videos, your computer will send big requests and you may need to consider picking a plan with higher upload speeds.
+* **Download Speed** determines how quickly you receive the response. If you watch a lot of movies or download alot of files, your computer will receive big responses so you may consider picking a plan with higher download speeds.
 
 Most ISPs present upload and download speeds in terms of **bits**, but your computer displays file sizes in **bytes**. There are 8 bits in 1 byte. 
 
@@ -103,7 +103,7 @@ A Hobbyte
 
 {% sideBySide %}
 
-Once you have picked your ISP, picked a plan (download / upload speeds), and paid your fees, 2 things will happen:
+Once you have chosen your ISP, a plan (download / upload speeds), and paid your fees, 2 things will happen:
 1. Your home now needs to be physically connected to the internet via a cable before you will be able to use the internet. 
 If a cable aready exist, it can be reused. Otherwise, your ISP will send a technician to install a cable for you. Every request and response to and from the internet will go through this cable. 
 2. You will be assigned a **public ip address**. Any request sent to this ip address will be sent to this cable in your home
