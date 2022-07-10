@@ -22,10 +22,10 @@ export const exerciseStat = {
     return exerciseInfo.correctCount || 0;
   },
 
-  hasNotCompleted: (articleName, exerciseId) => {
+  hasCompleted: (articleName, exerciseId) => {
     const exerciseInfo = getExerciseInfo(articleName, exerciseId);
 
-    return !exerciseInfo.isComplete;
+    return !!exerciseInfo.isComplete;
   },
 
   completeExercise: (articleName, exerciseId) => {
