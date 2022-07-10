@@ -3,9 +3,7 @@ import React, { useRef, useState, useEffect, useMemo } from "react";
 import Markdoc from "@markdoc/markdoc";
 
 import { exerciseStat } from "../../lib/localStorage.js";
-
-import { CodeBlock, fence } from "./Fence.js";
-import { Mermaid, mermaid } from "./Mermaid.js";
+import { renderMarkdoc } from "./render.js";
 
 /* Design
  * Once user reveals solution, cannot submit anymore
@@ -51,20 +49,8 @@ const Requirement = ({ requiredCorrect, currentCorrect }) => {
 
 const Solution = ({ explanation, viewed, viewSolution }) => {
   const explanationComponent = useMemo(() => {
-    const ast = Markdoc.parse(explanation);
-    const content = Markdoc.transform(ast, {
-      nodes: {
-        fence,
-      },
-      tags: {
-        mermaid,
-      },
-    });
-    return Markdoc.renderers.react(content, React, {
-      components: {
-        CodeBlock,
-        Mermaid,
-      },
+    return renderMarkdoc({
+      content: explanation,
     });
   }, [explanation]);
 
@@ -174,20 +160,8 @@ export function Exercise({ exerciseId, articleName, children }) {
   } = question;
 
   const promptComponent = useMemo(() => {
-    const ast = Markdoc.parse(prompt);
-    const content = Markdoc.transform(ast, {
-      nodes: {
-        fence,
-      },
-      tags: {
-        mermaid,
-      },
-    });
-    return Markdoc.renderers.react(content, React, {
-      components: {
-        CodeBlock,
-        Mermaid,
-      },
+    return renderMarkdoc({
+      content: prompt,
     });
   }, [prompt]);
 
