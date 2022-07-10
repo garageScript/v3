@@ -53,11 +53,12 @@ export function SlideShow({ children }) {
   return (
     <div>
       {currentSlide}
-      <div className="flex">
-        <div className="equal-width center">
+      <div className="flex w-full">
+        <div className="w-full text-center">
           <LeftButton onClick={goLeft} currentId={slideId} slides={slides} />
         </div>
-        <div className="equal-width center">
+        <div className="divider divider-horizontal"></div>
+        <div className="w-full text-center">
           <RightButton onClick={goRight} currentId={slideId} slides={slides} />
         </div>
       </div>

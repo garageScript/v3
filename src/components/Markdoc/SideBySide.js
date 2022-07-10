@@ -12,9 +12,10 @@ export function SideBySide({ children }) {
     first = childrenArr;
   }
   return (
-    <div className="side-by-side flex row">
-      <div className="left column equal-width">{first}</div>
-      <div className="right column equal-width">{rest}</div>
+    <div className="flex w-full">
+      <div className="w-full">{first}</div>
+      <div className="divider divider-horizontal"></div>
+      <div className="w-full">{rest}</div>
     </div>
   );
 }

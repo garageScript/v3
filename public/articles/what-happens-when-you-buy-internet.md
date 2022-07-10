@@ -47,7 +47,7 @@ When your computer sends a request to my computer, the information goes through 
 When you went to this site {% $hostname %}, your computer sent a request to my computer. 
 My computer sent you a response, which you are reading now. 
 
-**{% $roundTripTime %} seconds** {% .center %}
+**{% $roundTripTime %} seconds** {% .text-center %}
 
 The whole trip, your computer sending the request to my computer, my computer processing your request, and my computer sending a response back to you, took **{% $roundTripTime %} seconds** 
 
@@ -129,11 +129,11 @@ When buying a modem, make sure the modem can process the data faster than your i
 Since you have internet access, you are connected to a modem somewhere.   
 The public IP address associated with the modem is 
 
-**{% $reqIp %}** {% .center %}
+**{% $reqIp %}** {% .text-center %}
 
 To continue, I invite you to send a request to my public ip address!
 
-**{% $myIp %}:{% $externalPort %}** {% .center %}
+**{% $myIp %}:{% $externalPort %}** {% .text-center %}
 
 Put the above into the url bar like so
 

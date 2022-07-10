@@ -12,7 +12,7 @@ If not, the browser will automatically add it in for you.
 
 In our case, your browser will automatically add a `http` protocol by putting `http://` in front of our url, changing the url to:
 
-**http://{% $myIp %}:{% $externalPort %}** {% .center %}
+**http://{% $myIp %}:{% $externalPort %}** {% .text-center %}
 
 This url has the following parts:
 * **Protocol** (http) - The url above is using the http protocol. 
@@ -41,7 +41,7 @@ What happens after you typed **{% $myIp %}:{% $externalPort %}** into the url ba
 
 First the browser adds the `http` protocol so the url becomes 
 
-**http://{% $myIp %}:{% $externalPort %}** {% .center %}
+**http://{% $myIp %}:{% $externalPort %}** {% .text-center %}
 
 
 {% slideShow %}

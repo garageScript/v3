@@ -47,7 +47,7 @@
         prompt: `
 Given this URL
 
-**${url}** {% .center %}
+**${url}** {% .text-center %}
 
 What is the ${randomPart}?
         `,
