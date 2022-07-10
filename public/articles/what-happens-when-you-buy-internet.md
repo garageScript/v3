@@ -92,8 +92,9 @@ Most ISPs present upload and download speeds in terms of **bits**, but your comp
 
 So, 8 Megabits per second (aka 8Mbps) is actually 1 MegaByte per second (1 MBps)
 
-> What do you call 8 hobbits?   
+{% toggle summary="What do you call 8 hobbits?" %}
 A Hobbyte
+{% /toggle %}
 
 {% exercise exerciseId="ispSpeed" articleName=$articleName %}
 {% /exercise %}

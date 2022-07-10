@@ -11,6 +11,7 @@ import { Heading, heading } from "./components/Markdoc/Heading.js";
 import { Mermaid, mermaid } from "./components/Markdoc/Mermaid.js";
 import { SideBySide, sideBySide } from "./components/Markdoc/SideBySide.js";
 import { SlideShow, slideShow } from "./components/Markdoc/SlideShow.js";
+import { Toggle, toggle } from "./components/Markdoc/Toggle.js";
 
 const markdocVariables = JSON.parse(markdocVariableString);
 
@@ -34,6 +35,7 @@ fetch(mdContentPath)
         mermaid,
         sideBySide,
         slideShow,
+        toggle,
       },
     });
     const children = Markdoc.renderers.react(content, React, {
@@ -44,9 +46,18 @@ fetch(mdContentPath)
         Mermaid,
         SideBySide,
         SlideShow,
+        Toggle,
       },
     });
 
+    const App = () => {
+      return (
+        <div className="container">
+          <article className="prose m-auto mt-32">{children}</article>
+        </div>
+      );
+    };
+
     const root = createRoot(document.querySelector("#root"));
-    root.render(children);
+    root.render(<App />);
   });

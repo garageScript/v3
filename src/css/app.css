@@ -1,6 +1,6 @@
-h1 {
-  color: #f0f !important;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /*
  * Source: 

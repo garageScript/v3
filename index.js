@@ -21,7 +21,7 @@ const externalPort = `8035`;
 const ipUrl = `${myIp}:${externalPort}`;
 
 const getReqIp = (req) => {
-  const initialIp = req.get("x-forwarded-for") || req.ip;
+  const initialIp = req.get("x-forwarded-for") || req.ip || "";
   return initialIp.replace("::ffff:", "");
 };
 
@@ -113,9 +113,15 @@ app.get(["/", "/:article"], (req, res) => {
   };
 
   res.send(`
-<link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
-<link rel="stylesheet" href="/main.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+  <link rel="stylesheet" href="/main.css">
+</head>
+<body>
 
 <div id="root"></div>
 
@@ -127,6 +133,8 @@ const markdocExercises = ${exerciseStringList[articleName]};
 </script>
 
 <script src="/main.js"></script>
+</body>
+</html>
   `);
 });
 

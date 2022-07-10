@@ -75,7 +75,11 @@ const SubmitButton = ({ onClick, viewedSolution }) => {
   if (viewedSolution) {
     return <></>;
   }
-  return <button onClick={onClick}>Submit</button>;
+  return (
+    <button className="btn" onClick={onClick}>
+      Submit
+    </button>
+  );
 };
 
 const ResultMessage = ({ result }) => {
@@ -179,31 +183,58 @@ export function Exercise({ exerciseId, articleName, children }) {
     setViewedSolution(false);
   };
 
+  const answerUnitComponent = answerUnit ? (
+    <label className="label">
+      <span className="label-text-alt">{answerUnit}</span>
+    </label>
+  ) : (
+    ""
+  );
+
   return (
-    <div>
-      <p>{title}</p>
-      {promptComponent}
-      <input type="text" ref={inputRef}></input>
-      {answerUnit}
-      <SubmitButton onClick={handleClick} viewedSolution={viewedSolution} />
-      <Requirement
-        requiredCorrect={requiredCorrect}
-        currentCorrect={exerciseStat.getCorrectCount(articleName, exerciseId)}
-      />
-      <hr />
-      <ResultMessage result={result} />
+    <div className="card bg-neutral text-neutral-content mt-16">
+      <div className="card-body">
+        <h3 className="card-title">Exercise: {title}</h3>
+        {promptComponent}
+        <div className="flex">
+          <div className="equal-width pr-4">
+            <input
+              type="text"
+              ref={inputRef}
+              className="input input-bordered w-full"
+            ></input>
+            {answerUnitComponent}
+          </div>
+          <div>
+            <SubmitButton
+              onClick={handleClick}
+              viewedSolution={viewedSolution}
+            />
+          </div>
+        </div>
+        <div className="absolute top-0 right-3">
+          <Requirement
+            requiredCorrect={requiredCorrect}
+            currentCorrect={exerciseStat.getCorrectCount(
+              articleName,
+              exerciseId
+            )}
+          />
+        </div>
+        <ResultMessage result={result} />
 
-      <NextProblem
-        onNext={onNext}
-        viewedSolution={viewedSolution}
-        isCorrect={result}
-      />
+        <NextProblem
+          onNext={onNext}
+          viewedSolution={viewedSolution}
+          isCorrect={result}
+        />
 
-      <Solution
-        explanation={explanation}
-        viewed={viewedSolution}
-        viewSolution={viewSolution}
-      />
+        <Solution
+          explanation={explanation}
+          viewed={viewedSolution}
+          viewSolution={viewSolution}
+        />
+      </div>
     </div>
   );
 }
