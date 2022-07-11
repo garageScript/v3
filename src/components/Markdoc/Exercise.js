@@ -57,7 +57,7 @@ const Solution = ({ explanation, viewed, viewSolution }) => {
   if (!viewed) {
     return (
       <div>
-        <button className="btn btn-link" onClick={viewSolution}>
+        <button className="btn btn-ghost" onClick={viewSolution}>
           View Solution
         </button>
       </div>
@@ -80,7 +80,6 @@ const SubmitButton = ({ onClick, viewedSolution }) => {
 
 const ResultMessage = ({ result }) => {
   let resultMessage = "";
-  console.log(result);
   if (result === true) {
     return <p className="text-success text-center">Your answer is correct!</p>;
   }
@@ -207,7 +206,7 @@ export function Exercise({ exerciseId, articleName, children }) {
   const answerUnitComponent = answerUnit ? <span>{answerUnit}</span> : "";
 
   return (
-    <div className="relative card bg-neutral text-neutral-content mt-16">
+    <div className="relative card bg-base-200 shadow-xl mt-16">
       <div className="card-body">
         <h3 className="card-title">Exercise: {title}</h3>
         {promptComponent}
