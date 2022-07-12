@@ -107,8 +107,8 @@ const CompletionMessage = ({
     return "";
   }
   return (
-    <div className="absolute top-0 bottom-0 left-0 right-0 bg-success-content p-12 text-center">
-      <h1 className="">Congratulations!</h1>
+    <div className="absolute top-0 bottom-0 left-0 right-0 bg-success text-success-content p-12 text-center">
+      <h1 className="text-success-content">Congratulations!</h1>
       <p>
         You have completed this exercise. Feel free to practice more if you
         think you need it.{" "}
@@ -129,7 +129,7 @@ const CompletionMessage = ({
           />
         </svg>
       </div>
-      <button className="btn btn-link text-neutral-content" onClick={dismiss}>
+      <button className="btn btn-link text-neutral-focus" onClick={dismiss}>
         Dismiss
       </button>
     </div>

@@ -18,7 +18,7 @@ This url has the following parts:
 * **Protocol** (http) - The url above is using the http protocol. 
 If you do not specify a protocol, the browser will automatically insert **http** or **https** protocol.
 A protocol specifies what information the request and response will have and how they are structured.
-For example, the `http` protocol specifies that all request and responses must have a header section and the information that request headers and response headers must contain.
+For example, the `http` protocol specifies that all requests and responses must have a header section and the information that request headers and response headers must contain.
 Other common protocols (I'm only listing the common ones that you may be expected to know)
   * DNS - Protocol used for getting the public IP address from a domain name. (covered in later section)
   * FTP - Protocol used specifically for sending files. You can also send files using the http protocol.
