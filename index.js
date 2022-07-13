@@ -130,6 +130,11 @@ const markdocVariableString = '${JSON.stringify(variables)}'
 const mdContentPath = '/articles/${articleName}.md'
 
 const markdocExercises = ${exerciseStringList[articleName]};
+
+const changeTheme = (theme='cupcake') => {
+  document.documentElement.dataset.theme = theme
+}
+// Themes: https://daisyui.com/docs/themes/
 </script>
 
 <script src="/main.js"></script>
