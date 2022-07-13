@@ -7,8 +7,83 @@ To get here, you have typed **{% $myIp %}:{% $externalPort %}** into the url bar
 This section will guide you through what happens next, step by step, starting with the **url**.
 
 # URL
-After putting **{% $myIp %}:{% $externalPort %}** into the url bar, the browser will first check to see if you have specified a protocol.
-If not, the browser will automatically add it in for you. 
+The url you typed in ( *{% $myIp %}:{% $externalPort %}* ) is made up of 2 parts. 
+* **{% $myIp %}** is called the **hostname**, which is my Ip address. 
+* **{% $externalPort %}** is called the **port**.
+This is important only **after** the request has arrived at my modem.
+
+{% mermaid %}
+graph LR
+A[Your Computer] --> |Sends a request| B(Modem: {% $reqIp %})
+B --> C(The Internet)
+C --> D(Modem: {% $myIp %})
+D --> E(My Computer)
+{% /mermaid %}
+
+After putting **{% $myIp %}:{% $externalPort %}** into the url bar, the browser will create a request and send it out to the ip address *{% $myIp %}*.
+This request will arrive at my modem and then end up at my computer.
+
+# Code
+
+To be able to handle your incoming request, I need to write some code to tell the computer what to do. 
+Any code that tells the computer what to do is called an **application**.
+
+![folder image](http://69.181.248.93:8035/public/photos/uploads/appfolder-zombie.png)
+To write code, I created a folder called *website* (I could have named the folder whatever I wanted) and created a file inside the folder called `zombie` using a text editor (I could have named the file whatever I wanted).
+The most common editor used to write code currently is [vscode](https://code.visualstudio.com/)
+
+## Editor and Files and Sizes
+Why do you need a text editor? Why can't you just use microsoft word?
+
+![microsoft word](http://69.181.248.93:8035/public/photos/uploads/helloThereWord.jpg)
+The reason is that editors like Microsoft Word allows **rich text editing**, meaning you can add styles to your text by changing the font size, making it bold, setting margins, etc. 
+So if you write `Hello there! How are you doing?` into Microsoft Word and save the file as (`hello.docx`), Microsoft Word will write into `hello.docx` in a way that only Microsoft Word will understand, preserving all your text styles.
+
+![microsoft word output](http://69.181.248.93:8035/public/photos/uploads/helloThereTxt.jpg)
+The content that gets saved into `hello.docx` file actually looks like the above. Gibberish that only Microsoft Word understands. 
+
+Unlike rich text editors like Microsoft Word, a text editor like [vscode](https://code.visualstudio.com/) will contain exactly what you write.
+So if I wrote `Hello there! How are you doing?` and save, the file will contain exactly `Hello there! How are you doing?`.
+
+
+
+
+
+
+## Editor
+To write code, you 
+
+
+
+
+```js
+const http = require("http");
+
+const htmlString = `
+  <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+  <article>
+  <h1>What's just happened!?</h1>
+  <p>What happened when you put a <strong>url</strong> (i.e <code>69.181.248.93:8035</code>) into the url bar and hit &quot;enter&quot;?</p>
+  <h2>Receiving Your Request on Device</h2>
+  ...
+  </article>
+`
+
+const requestListener = function (req, res) {
+  res.send(htmlString)
+};
+
+const server = http.createServer(requestListener);
+
+server.listen(3035)
+```
+
+
+
+
+
+# To be Added in later
 
 In our case, your browser will automatically add a `http` protocol by putting `http://` in front of our url, changing the url to:
 
@@ -91,38 +166,6 @@ Your request arrives to my modem, then my computer
 {% /sideBySide %}
 
 {% /slideShow %}
-
-In the next section, I will walk you through some code I wrote to handle your incoming request.
-
-# Code
-
-To write code, I created a folder and created a file inside the folder called `zombie` using a text editor.
-The most common editor used to write code currently is [vscode](https://code.visualstudio.com/)
-
-
-
-```js
-const http = require("http");
-
-const htmlString = `
-  <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
-  <article>
-  <h1>What's just happened!?</h1>
-  <p>What happened when you put a <strong>url</strong> (i.e <code>69.181.248.93:8035</code>) into the url bar and hit &quot;enter&quot;?</p>
-  <h2>Receiving Your Request on Device</h2>
-  ...
-  </article>
-`
-
-const requestListener = function (req, res) {
-  res.send(htmlString)
-};
-
-const server = http.createServer(requestListener);
-
-server.listen(3035)
-```
 
 Now let's recap: When you visit **{% $hostname %}**, this happens:
 
