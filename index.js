@@ -32,7 +32,7 @@ app.use("/public", express.static("public"));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/photos/uploads/");
+    cb(null, "public/uploads/");
   },
   filename: function (req, file, cb) {
     const uniquePrefix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -40,18 +40,18 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
-app.post("/photos/uploads", upload.array("assets[]"), (req, res) => {
+app.post("/api/files/uploads", upload.array("assets[]"), (req, res) => {
   res.json({
     success: true,
   });
 });
-app.delete("/files", (req, res) => {
+app.delete("/api/files", (req, res) => {
   const { pathPrefix, name } = req.query;
   fs.unlink(`${pathPrefix}/${name}`, (err) => {
     res.json(req.query);
   });
 });
-app.post("/files/rename", (req, res) => {
+app.post("/api/files/rename", (req, res) => {
   console.log(req.body);
   const pathPrefix = path.resolve(req.body.pathPrefix);
   fs.rename(
@@ -65,9 +65,17 @@ app.post("/files/rename", (req, res) => {
     }
   );
 });
-app.get("/files", (req, res) => {
+app.get("/api/files", (req, res) => {
   const absolutePath = path.resolve(req.query.path);
+  console.log(absolutePath);
   fs.readdir(absolutePath, (err, fileNames) => {
+    if (err || !fileNames) {
+      return res.json({
+        path: req.query.path,
+        absolutePath,
+        files: [],
+      });
+    }
     const files = fileNames.map((name) => {
       return {
         ...path.parse(name),

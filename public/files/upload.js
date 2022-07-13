@@ -27,7 +27,7 @@
     files.forEach((file) => {
       formData.append("assets[]", file, file.name);
     });
-    fetch("/photos/uploads", {
+    fetch("/api/files/uploads", {
       method: "POST",
       body: formData,
     })

@@ -1,4 +1,4 @@
-const DEFAULT_PATH = "public/photos/uploads"; // TODO: Change to .
+const DEFAULT_PATH = "public/uploads"; // TODO: Change to .
 const IMAGE_EXTENSIONS = [".gif", ".png", ".jpg"];
 function FileCard(parent, file, pathPrefix) {
   console.log(pathPrefix);
@@ -26,7 +26,7 @@ function FileCard(parent, file, pathPrefix) {
 
   const delete$ = container.querySelector(".deleteButton");
   delete$.addEventListener("click", () => {
-    fetch(`/files?pathPrefix=${pathPrefix}&name=${file.base}`, {
+    fetch(`/api/files?pathPrefix=${pathPrefix}&name=${file.base}`, {
       method: "DELETE",
     })
       .then((r) => {
@@ -48,7 +48,7 @@ function FileCard(parent, file, pathPrefix) {
   renameButton.addEventListener("click", () => {
     const newName = fileNameInput.value;
     renameButton.innerText = "...";
-    fetch(`/files/rename`, {
+    fetch(`/api/files/rename`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -78,7 +78,7 @@ function FileCard(parent, file, pathPrefix) {
 (function () {
   const fetchFiles = (pathValue) => {
     const path = pathValue || DEFAULT_PATH;
-    fetch(`/files?path=${path}`)
+    fetch(`/api/files?path=${path}`)
       .then((r) => r.json())
       .then((data) => {
         console.log(data);
