@@ -32,7 +32,7 @@ Any code that tells the computer what to do is called an **application**.
 To write code, I created a folder called *website* (I could have named the folder whatever I wanted) and created a file inside the folder called `zombie` using a text editor (I could have named the file whatever I wanted).
 The most common editor used to write code currently is [vscode](https://code.visualstudio.com/)
 
-## Editor and Files and Sizes
+## Editor
 Why do you need a text editor? Why can't you just use microsoft word?
 
 ![microsoft word](http://69.181.248.93:8035/uploads/helloThereWord.jpg)
@@ -45,8 +45,45 @@ The content that gets saved into `hello.docx` file actually looks like the above
 Unlike rich text editors like Microsoft Word, a text editor like [vscode](https://code.visualstudio.com/) will contain exactly what you write.
 So if I wrote `Hello there! How are you doing?` and save, the file will contain exactly `Hello there! How are you doing?`.
 
+## Files and sizes
+Now that you understand why we write code in a text editor, let's talk about file sizes!
 
+Each character in a file takes up 1-2 bytes, most of them 1 byte.
+For example, if you write the following into a file (ignore the line numbers, they are there to help you see that there are two lines)
 
+```
+Hello World
+How are you?
+```
+
+the file would be a little more than 24 bytes. Don't forget that spaces and **new line** (between `World` and `How`) counts as characters too!)
+
+A file can be get big. Instead of `50,000,000 bytes` we say the file is `50 megabytes`.
+Here is the conversion table:
+
+{% table %}
+* Bytes
+* Conversion
+---
+* 1024 bytes
+* 1 kilobyte (1KB)
+---
+* 1,048,576 bytes
+* 1 megabyte (1MB)
+---
+* 1,073,741,824 bytes
+* 1 gigabyte (1GB)
+---
+* 1,099,511,627,776 bytes
+* 1 terabyte (1TB)
+---
+* 1,125,899,906,842,624 bytes
+* 1 petabyte (1PB)
+{% /table %}
+
+After petabyte, it is Exa Byte, then Zetta Byte, then Yotta Byte. You don't have to know them.
+
+For simplicity, instead of using dividing and multiplying by 1024 when converting bytes, we usually just use 1000 because it is easier.
 
 
 
