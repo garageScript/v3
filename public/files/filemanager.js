@@ -1,4 +1,4 @@
-const DEFAULT_PATH = "public/uploads";
+const DEFAULT_PATH = ".";
 const IMAGE_EXTENSIONS = [".gif", ".png", ".jpg"];
 function FileCard(parent, file, pathPrefix) {
   console.log(pathPrefix);
@@ -22,19 +22,24 @@ function FileCard(parent, file, pathPrefix) {
   parent.append(container);
 
   const img$ = container.querySelector("img");
-  img$.addEventListener("click", () => {
-    window.modal.showImage(getImgPath());
-  });
+  if (img$) {
+    img$.addEventListener("click", () => {
+      window.modal.showImage(getImgPath());
+    });
+  }
 
   const delete$ = container.querySelector(".deleteButton");
   delete$.addEventListener("click", () => {
-    fetch(`/api/files?pathPrefix=${pathPrefix}&name=${file.base}`, {
+    fetch(`/api/files?path=${pathPrefix}&name=${file.base}`, {
       method: "DELETE",
     })
       .then((r) => {
         return r.json();
       })
       .then((data) => {
+        if (data.error) {
+          return alert("error deleting file, please check server logs");
+        }
         alert("change successful");
       })
       .catch((err) => {
@@ -58,7 +63,7 @@ function FileCard(parent, file, pathPrefix) {
       body: JSON.stringify({
         original: file.base,
         newName: `${newName}${file.ext}`,
-        pathPrefix,
+        path: pathPrefix,
       }),
     })
       .then((r) => {
@@ -71,7 +76,9 @@ function FileCard(parent, file, pathPrefix) {
         // Update file object with new properties
         file.base = `${newName}${file.ext}`;
         file.name = newName;
-        img$.src = getImgPath();
+        if (img$) {
+          img$.src = getImgPath();
+        }
         alert("change successful");
       })
       .catch((err) => {

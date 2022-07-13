@@ -21,14 +21,33 @@ router.post("/uploads", upload.array("assets[]"), (req, res) => {
     success: true,
   });
 });
+
+const pathCheck = (req, res, next) => {
+  const inputPath = req.query.path || req.body.path;
+  const destination = path.resolve("./public/uploads", inputPath);
+  const relative = path.relative("./public/uploads", destination);
+  if (relative.includes("..")) {
+    return res.json({
+      error: "trying to access unauthorized paths",
+    });
+  }
+  req.inputPath = destination;
+  next();
+};
+router.use(pathCheck);
+
 router.delete("/", (req, res) => {
-  const { pathPrefix, name } = req.query;
-  fs.unlink(`${pathPrefix}/${name}`, (err) => {
-    res.json(req.query);
+  const { name } = req.query;
+  fs.unlink(`${req.inputPath}/${name}`, (error) => {
+    return res.json({
+      error,
+      success: !error,
+      query: req.query,
+    });
   });
 });
 router.post("/rename", (req, res) => {
-  const pathPrefix = path.resolve(req.body.pathPrefix);
+  const pathPrefix = path.resolve(req.inputPath);
   fs.rename(
     `${pathPrefix}/${req.body.original}`,
     `${pathPrefix}/${req.body.newName}`,
@@ -40,13 +59,12 @@ router.post("/rename", (req, res) => {
     }
   );
 });
+
 router.get("/", (req, res) => {
-  const absolutePath = path.resolve(req.query.path);
-  fs.readdir(absolutePath, (err, fileNames) => {
+  fs.readdir(req.inputPath, (err, fileNames) => {
     if (err || !fileNames) {
       return res.json({
         path: req.query.path,
-        absolutePath,
         files: [],
       });
     }
@@ -57,7 +75,6 @@ router.get("/", (req, res) => {
     });
     res.json({
       path: req.query.path,
-      absolutePath,
       files,
       err,
     });
