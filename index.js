@@ -26,7 +26,6 @@ const getReqIp = (req) => {
 app.use(express.static("dist"));
 app.use(express.static("public"));
 app.use(express.json());
-app.use("/public", express.static("public"));
 
 app.use("/api/files", fileController);
 

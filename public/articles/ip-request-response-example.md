@@ -2,7 +2,7 @@
 
 To get here, you have typed **{% $myIp %}:{% $externalPort %}** into the url bar. 
 
-![ip url](https://v3.amayz.dev/public/uploads/ip-url.png)
+![ip url](https://v3.amayz.dev/uploads/ip-url.png)
 
 This section will guide you through what happens next, step by step, starting with the **url**.
 
@@ -28,18 +28,18 @@ This request will arrive at my modem and then end up at my computer.
 To be able to handle your incoming request, I need to write some code to tell the computer what to do. 
 Any code that tells the computer what to do is called an **application**.
 
-![folder image](http://69.181.248.93:8035/public/uploads/appfolder-zombie.png)
+![folder image](http://69.181.248.93:8035/uploads/appfolder-zombie.png)
 To write code, I created a folder called *website* (I could have named the folder whatever I wanted) and created a file inside the folder called `zombie` using a text editor (I could have named the file whatever I wanted).
 The most common editor used to write code currently is [vscode](https://code.visualstudio.com/)
 
 ## Editor and Files and Sizes
 Why do you need a text editor? Why can't you just use microsoft word?
 
-![microsoft word](http://69.181.248.93:8035/public/uploads/helloThereWord.jpg)
+![microsoft word](http://69.181.248.93:8035/uploads/helloThereWord.jpg)
 The reason is that editors like Microsoft Word allows **rich text editing**, meaning you can add styles to your text by changing the font size, making it bold, setting margins, etc. 
 So if you write `Hello there! How are you doing?` into Microsoft Word and save the file as (`hello.docx`), Microsoft Word will write into `hello.docx` in a way that only Microsoft Word will understand, preserving all your text styles.
 
-![microsoft word output](http://69.181.248.93:8035/public/uploads/helloThereTxt.jpg)
+![microsoft word output](http://69.181.248.93:8035/uploads/helloThereTxt.jpg)
 The content that gets saved into `hello.docx` file actually looks like the above. Gibberish that only Microsoft Word understands. 
 
 Unlike rich text editors like Microsoft Word, a text editor like [vscode](https://code.visualstudio.com/) will contain exactly what you write.
@@ -181,13 +181,13 @@ C -->|2. Sends a Response| B
 ## Router
 By connecting your computer to the modem directly, your computer is the ONLY device that can use your internet! What about your phone, tablets, other computers and other devices? For this reason, almost nobody would connect their computer directly to their modem. Instead, most people will buy a router [like this one](https://www.amazon.com/NETGEAR-4-Stream-WiFi-Router-R6700AX/dp/B08KTXG8Q5/) and connect their modem's ethernet to the router
 
-![router back](https://v3.amayz.dev/public/uploads/router-back.png)
+![router back](https://v3.amayz.dev/uploads/router-back.png)
 
 With a router connected, data will now flow from the cable into the modem then to the router. As you can see in the image above, you can connect up to 4 computers via ethernet cables and even more computers via wifi! 
 
 To setup your wifi name and password as well as other router configurations, first you need to connect your computer to the router. Once your computer is connected to the router, you can access your router's configuration page by opening your browser and typing this url: `192.168.0.1` (This url may be different depending on your router. Your router's manual will tell you which url to type in as well as the username/password). Once there, you can setup your wifi's network name and password
 
-![router admin wifi](https://v3.amayz.dev/public/uploads/router-admin-wifi.png)
+![router admin wifi](https://v3.amayz.dev/uploads/router-admin-wifi.png)
 
 The reason why most wifi routers support 2 frequencies, 2.4Ghz and 5Ghz, is because when you have too many devices on wifi on the same frequency, they interfere with each other, leading to conjested / slow network.
 
@@ -266,7 +266,7 @@ Normally, your request would die there because the router does not know which on
 
 To make sure my computer receives incoming request from the router, I went to the router's admin page and configured **port forwarding**. The router will look at the **port number** specified in the url, *{% $externalPort %}*.
 
-![port forwarding admin](https://v3.amayz.dev/public/uploads/port-forwarding.png)
+![port forwarding admin](https://v3.amayz.dev/uploads/port-forwarding.png)
 
 This is telling the router that whenever the router receives a request on port *{% $externalPort %}*, forward the request to `192.168.0.21` on port 3035. `192.168.0.21` is a **static local ip address** I configured on my router for my computer.
 

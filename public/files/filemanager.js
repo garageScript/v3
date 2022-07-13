@@ -1,11 +1,11 @@
-const DEFAULT_PATH = "public/uploads"; // TODO: Change to .
+const DEFAULT_PATH = "public/uploads";
 const IMAGE_EXTENSIONS = [".gif", ".png", ".jpg"];
 function FileCard(parent, file, pathPrefix) {
   console.log(pathPrefix);
   const container = document.createElement("div");
   container.classList.add("card");
   const getImgPath = () => {
-    return `/${pathPrefix}/${file.base}`;
+    return `/uploads/${file.base}`;
   };
   const img = IMAGE_EXTENSIONS.includes(file.ext)
     ? `<img src="${getImgPath()}" />`

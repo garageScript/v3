@@ -28,7 +28,6 @@ router.delete("/", (req, res) => {
   });
 });
 router.post("/rename", (req, res) => {
-  console.log(req.body);
   const pathPrefix = path.resolve(req.body.pathPrefix);
   fs.rename(
     `${pathPrefix}/${req.body.original}`,
@@ -43,7 +42,6 @@ router.post("/rename", (req, res) => {
 });
 router.get("/", (req, res) => {
   const absolutePath = path.resolve(req.query.path);
-  console.log(absolutePath);
   fs.readdir(absolutePath, (err, fileNames) => {
     if (err || !fileNames) {
       return res.json({

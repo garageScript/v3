@@ -39,7 +39,7 @@ Just like how you can send me mail (letter or a package) if you know my address,
 
 Let's say you live in Bangladesh and you want to send me (San Francisco) a mail package. It will take a few days because your package needs to be prepared, put on a plane, and then delivered by a truck to my door.
 
-![mail journey](https://v3.amayz.dev/public/uploads/sf-bangladesh.png)
+![mail journey](https://v3.amayz.dev/uploads/sf-bangladesh.png)
 
 In contrast, our internet world is connected by [a few hundred cables laid on the ocean floor](what-happens-when-you-buy-internet). 
 When your computer sends a request to my computer, the information goes through the cables and eventually ends up in my computer.
@@ -110,12 +110,12 @@ If a cable aready exist, it can be reused. Otherwise, your ISP will send a techn
 
 ---
 
-![cable](https://v3.amayz.dev/public/uploads/comcast-coaxial-cable.png)
+![cable](https://v3.amayz.dev/uploads/comcast-coaxial-cable.png)
 {% /sideBySide %}
 
 
 {% sideBySide %}
-![modem back](https://v3.amayz.dev/public/uploads/modem-outlet.png)
+![modem back](https://v3.amayz.dev/uploads/modem-outlet.png)
 
 To connect your computer to this internet cable, you need a modem [like this one](https://www.amazon.com/ARRIS-SURFboard-SB6183-Docsis-Packaging/dp/B00MA5U1FW/ref=asc_df_B00MA5U1FW/). 
 
@@ -137,6 +137,6 @@ To continue, I invite you to send a request to my public ip address!
 
 Put the above into the url bar like so
 
-![ip url](https://v3.amayz.dev/public/uploads/ip-url.png)
+![ip url](https://v3.amayz.dev/uploads/ip-url.png)
 
 Depending on the operating system and browser you use, your browser may look different from the image above.
