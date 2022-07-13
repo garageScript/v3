@@ -4,9 +4,11 @@ function FileCard(parent, file, pathPrefix) {
   console.log(pathPrefix);
   const container = document.createElement("div");
   container.classList.add("card");
-  const imgPath = `/${pathPrefix}/${file.base}`;
+  const getImgPath = () => {
+    return `/${pathPrefix}/${file.base}`;
+  };
   const img = IMAGE_EXTENSIONS.includes(file.ext)
-    ? `<img src="${imgPath}" />`
+    ? `<img src="${getImgPath()}" />`
     : "";
   container.innerHTML = `
     <div class="deleteButton">X</div>
@@ -21,7 +23,7 @@ function FileCard(parent, file, pathPrefix) {
 
   const img$ = container.querySelector("img");
   img$.addEventListener("click", () => {
-    window.modal.showImage(imgPath);
+    window.modal.showImage(getImgPath());
   });
 
   const delete$ = container.querySelector(".deleteButton");
@@ -63,6 +65,13 @@ function FileCard(parent, file, pathPrefix) {
         return r.json();
       })
       .then((data) => {
+        if (data.error) {
+          return alert("error renaming file, please check server logs");
+        }
+        // Update file object with new properties
+        file.base = `${newName}${file.ext}`;
+        file.name = newName;
+        img$.src = getImgPath();
         alert("change successful");
       })
       .catch((err) => {
