@@ -272,3 +272,12 @@ export const exercise = {
     },
   },
 };
+
+/* Example
+
+{% exercise exerciseId="urlIdentification1" articleName=$articleName %}
+{% /exercise %}
+
+
+Make sure public/exercises/{articleName}.cjs contains your exercise with the relevant info
+*/
