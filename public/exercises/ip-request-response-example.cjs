@@ -131,4 +131,77 @@ Therefore, a rich text editor like Microsoft Word will always need to store more
       };
     },
   },
+  writeSpeed: {
+    generateQuestion: () => {
+      const fasterInternetSpeeds = [40, 80];
+      const slowerInternetSpeeds = [2, 4];
+      const driveSpeeds = [1, 1.5, 2, 2.5];
+
+      const isInternetFaster = !!Math.floor(Math.random() * 2);
+      const internetSpeeds = isInternetFaster
+        ? fasterInternetSpeeds
+        : slowerInternetSpeeds;
+
+      const fileSize = Math.floor(Math.random() * 200) + 50;
+
+      const internetSpeed = internetSpeeds[0];
+      const driveSpeed = driveSpeeds[0];
+
+      const internetSpeedRangesInBytes = [
+        internetSpeed / 10,
+        internetSpeed / 8,
+      ];
+
+      const internetSpeedInBytes = internetSpeed / 8;
+
+      const explanationTxt = isInternetFaster
+        ? `Since internet speed is faster than your file write speed, the time it takes to store ${fileSize} GB file is determined by the hard drive write speed:
+
+${fileSize}/${driveSpeed}GBps
+        `
+        : `Since internet speed is slower than your file write speed, the time it takes to store ${fileSize} GB file is determined by your internet speed.
+
+${fileSize}/${internetSpeedInBytes}GBps
+        `;
+
+      return {
+        title: "Understanding harddrive speeds",
+        prompt: `
+Let's say your internet download speed is \`${internetSpeed}gbps\` (gigabits per second). 
+
+Let's say your harddrive write speed is \`${driveSpeed} GBps\` (Gigabytes per second).
+
+How long does it take to finish downloading a \`${fileSize} GB\` (Gigabyte) file?
+`,
+        requiredCorrect: 5,
+        validate: (submission) => {
+          const submissionNum = parseFloat(submission);
+          if (isInternetFaster) {
+            const [lower, higher] = [
+              Math.floor(fileSize / driveSpeed),
+              Math.ceil(fileSize / driveSpeed),
+            ];
+            return submission >= lower && submission <= higher;
+          }
+          const [lower, higher] = [
+            Math.floor(fileSize / internetSpeedRangesInBytes[1]),
+            Math.ceil(fileSize / internetSpeedRangesInBytes[0]),
+          ];
+          return submission >= lower && submission <= higher;
+        },
+        explanation: `
+First we need to convert internet speed from bits to bytes.
+
+There are 8 bits an a byte, so your internet speed is ${internetSpeed} gigabits / 8
+
+Your internet speed is ${internetSpeedInBytes} GBps
+
+Computers can write to the hard drive as the file is coming through the internet
+
+${explanationTxt}
+        `,
+        answerUnit: "seconds",
+      };
+    },
+  },
 };

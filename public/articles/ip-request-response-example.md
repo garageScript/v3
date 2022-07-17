@@ -50,6 +50,80 @@ If I wrote `Hello there! How are you doing?` using vscode and save, the file wil
 {% exercise exerciseId="biggerFileSize" articleName=$articleName %}
 {% /exercise %}
 
+## CPU, Memory, and Hard Drive
+
+Before using [vscode](https://code.visualstudio.com/), I had to install vscode into my computer.
+
+What does it mean to install vscode? 
+Installing vscode means that the computer is taking all the files needed to run vscode and storing it in my **harddrive**.
+
+A **harddrive** stores files. All the applications in your computer (your browser, your music player, etc) are files on your harddrive. 
+**Writing to disk** is the technical term for saying that the computer is saving a file to harddrive
+
+{% sideBySide %}
+
+![512 GB hd](http://69.181.248.93:8035/uploads/macbook-pro-hd.png)
+
+My harddrive has `512GB` capacity. 
+
+GB stands for **Gigabytes**.
+
+1GB has `1,073,741,824 bytes`
+
+If a file is `1GB`, my computer can at most 512 copies of that file
+
+Generally, an SSD can write about 1.5GB per second
+
+{% /sideBySide %}
+
+{% exercise exerciseId="writeSpeed" articleName=$articleName %}
+{% /exercise %}
+
+After installing VScode on my computer, I open VScode! 
+
+What happens when I opened an application like VScode? (colloquially, we say opening an application. But technically, you are opening a file)
+
+When I opened VSCode, my computer is getting all the files required to run VSCode and then putting them in **memory**.
+
+
+
+
+Each character in a file usually takes up 1 byte, sometimes 2 bytes.
+For example, if you write the following into a file (ignore the line numbers, they are there to help you see that there are two lines)
+
+```
+Hello World
+How are you?
+```
+
+the file would be a little more than 24 bytes. Don't forget that spaces and **new line** (between `World` and `How`) count as characters too!)
+
+A file can be get big. Instead of `50,000,000 bytes` we say the file is `50 megabytes`.
+Here is the conversion table:
+
+{% table %}
+* Bytes
+* Conversion
+---
+* 1024 bytes
+* 1 kilobyte (1KB)
+---
+* 1,048,576 bytes
+* 1 megabyte (1MB)
+---
+* 1,073,741,824 bytes
+* 1 gigabyte (1GB)
+---
+* 1,099,511,627,776 bytes
+* 1 terabyte (1TB)
+---
+* 1,125,899,906,842,624 bytes
+* 1 petabyte (1PB)
+{% /table %}
+
+After petabyte, it is Exa Byte, then Zetta Byte, then Yotta Byte. You don't have to know them.
+
+For simplicity, instead of using dividing and multiplying by 1024 when converting bytes, we usually just use 1000 because it is easier.
 
 ## File name
 
@@ -182,46 +256,6 @@ taheouteo
 
 
 
-
-## Files and sizes
-When you write into a file and save the file, the file will be saved on your harddrive.
-
-If you create a file using a text editor, each character in a file usually takes up 1 bytes, sometimes 2 bytes.
-For example, if you write the following into a file (ignore the line numbers, they are there to help you see that there are two lines)
-
-```
-Hello World
-How are you?
-```
-
-the file would be a little more than 24 bytes. Don't forget that spaces and **new line** (between `World` and `How`) counts as characters too!)
-
-A file can be get big. Instead of `50,000,000 bytes` we say the file is `50 megabytes`.
-Here is the conversion table:
-
-{% table %}
-* Bytes
-* Conversion
----
-* 1024 bytes
-* 1 kilobyte (1KB)
----
-* 1,048,576 bytes
-* 1 megabyte (1MB)
----
-* 1,073,741,824 bytes
-* 1 gigabyte (1GB)
----
-* 1,099,511,627,776 bytes
-* 1 terabyte (1TB)
----
-* 1,125,899,906,842,624 bytes
-* 1 petabyte (1PB)
-{% /table %}
-
-After petabyte, it is Exa Byte, then Zetta Byte, then Yotta Byte. You don't have to know them.
-
-For simplicity, instead of using dividing and multiplying by 1024 when converting bytes, we usually just use 1000 because it is easier.
 
 
 
