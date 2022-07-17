@@ -165,7 +165,7 @@ ${fileSize}/${internetSpeedInBytes}GBps
         `;
 
       return {
-        title: "Understanding harddrive speeds",
+        title: "Understanding harddrive writes",
         prompt: `
 Let's say your internet download speed is \`${internetSpeed}gbps\` (gigabits per second). 
 
@@ -201,6 +201,100 @@ Computers can write to the hard drive as the file is coming through the internet
 ${explanationTxt}
         `,
         answerUnit: "seconds",
+      };
+    },
+  },
+
+  approximateFileSizes: {
+    generateQuestion: () => {
+      const units = ["B", "KB", "MB", "GB", "TB", "PB"];
+      const unitStrs = {};
+      unitStrs["B"] = "bytes";
+      unitStrs["KB"] = "KiloBytes";
+      unitStrs["MB"] = "MegaBytes";
+      unitStrs["GB"] = "GigaBytes";
+      unitStrs["TB"] = "TeraBytes";
+      unitStrs["PB"] = "PetaBytes";
+
+      const getRandomUnit = (arr, exclusions = []) => {
+        const randomIndex = Math.floor(Math.random() * arr.length);
+
+        if (exclusions.includes(randomIndex)) {
+          return getRandomUnit(arr, exclusions);
+        }
+        return randomIndex;
+      };
+
+      const givenUnitIdx = getRandomUnit(units);
+      const destinationUnitIdx = getRandomUnit(units, [givenUnitIdx]);
+
+      const givenUnit = units[givenUnitIdx];
+      const destinationUnit = units[destinationUnitIdx];
+
+      const unitDiff = Math.abs(destinationUnitIdx - givenUnitIdx);
+
+      const givenSize =
+        destinationUnitIdx > givenUnitIdx
+          ? Math.floor(Math.random() * 99 * Math.pow(1000, unitDiff))
+          : Math.random().toFixed(3 * unitDiff);
+
+      const addCommas = (str, i = str.length, result = "") => {
+        if (!str.includes) {
+          return addCommas(str.toString(), i, result);
+        }
+        if (str.includes(".")) {
+          return str;
+        }
+        if (i <= 3) {
+          return `${str}${result}`;
+        }
+        const suffix = str.substring(i - 3);
+        const prefix = str.substring(0, i - 3);
+        return addCommas(prefix, i - 3, `,${suffix}${result}`);
+      };
+
+      const givenSizeWithCommas = addCommas(givenSize);
+
+      const unitDiffValue = Math.pow(1024, unitDiff);
+      const conversionStr = `There are \`${addCommas(unitDiffValue)} ${
+        units[Math.min(givenUnitIdx, destinationUnitIdx)]
+      }\` in a \`${units[Math.max(givenUnitIdx, destinationUnitIdx)]}\``;
+
+      const actionStr =
+        destinationUnitIdx > givenUnitIdx ? `divide` : `multiply`;
+
+      return {
+        title: "Approximate file sizes",
+        prompt: `
+A file size is \`${givenSizeWithCommas} ${givenUnit}\`
+
+How do you express it in \`${unitStrs[destinationUnit]}\`?
+`,
+        requiredCorrect: 10,
+        validate: (submission) => {
+          const submissionStr = submission.split(",").join("");
+          const submissionFloat = parseFloat(submissionStr);
+          if (destinationUnitIdx > givenUnitIdx) {
+            const ranges = [
+              Math.floor(givenSize / Math.pow(1024, unitDiff)),
+              Math.ceil(givenSize / Math.pow(1000, unitDiff)),
+            ];
+            return submissionFloat >= ranges[0] && submissionFloat <= ranges[1];
+          }
+          const ranges = [
+            Math.floor(givenSize * Math.pow(1000, unitDiff)),
+            Math.ceil(givenSize * Math.pow(1024, unitDiff)),
+          ];
+          return submissionFloat >= ranges[0] && submissionFloat <= ranges[1];
+        },
+        explanation: `
+${conversionStr}
+
+To convert from ${unitStrs[givenUnit]} to ${unitStrs[destinationUnit]}
+
+You ${actionStr} \`${givenSizeWithCommas}\` by \`${addCommas(unitDiffValue)}\`
+        `,
+        answerUnit: destinationUnit,
       };
     },
   },

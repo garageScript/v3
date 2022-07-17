@@ -166,6 +166,7 @@ export function Exercise({ exerciseId, articleName, children }) {
     setCount(count + 1);
     setResult(null);
     setViewedSolution(false);
+    setAnsValue("");
   };
 
   const handleClick = () => {

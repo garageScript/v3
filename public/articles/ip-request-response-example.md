@@ -58,7 +58,7 @@ What does it mean to install vscode?
 Installing vscode means that the computer is taking all the files needed to run vscode and storing it in my **harddrive**.
 
 A **harddrive** stores files. All the applications in your computer (your browser, your music player, etc) are files on your harddrive. 
-**Writing to disk** is the technical term for saying that the computer is saving a file to harddrive
+**Writing to drive** is the technical term for saying that the computer is saving a file to harddrive
 
 {% sideBySide %}
 
@@ -72,7 +72,7 @@ GB stands for **Gigabytes**.
 
 If a file is `1GB`, my computer can at most 512 copies of that file
 
-Generally, an SSD can write about 1.5GB per second
+Generally, an SSD (a type of harddrive that my computer has) can write about 1.5GB per second
 
 {% /sideBySide %}
 
@@ -81,15 +81,84 @@ Generally, an SSD can write about 1.5GB per second
 
 After installing VScode on my computer, I open VScode! 
 
-What happens when I opened an application like VScode? (colloquially, we say opening an application. But technically, you are opening a file)
+What happens when I open an application like VScode? (colloquially, we say opening an application. But technically, we are opening a file)
 
-When I opened VSCode, my computer is getting all the files required to run VSCode and then putting them in **memory**.
+When I opened VSCode, my computer is getting all the necessary files from hard drive that is required to run VSCode and then putting them in **memory**.
+The technical term for "getting all necessary files from hard drive" is **reading from drive**.
 
+Generally, an SSD can be read at about 1.5GB per second (very similar to write speeds).
 
+{% sideBySide %}
 
+![16 GB memory](http://69.181.248.93:8035/uploads/macbook-pro-memory.png)
+
+My computer's memory has `16GB` capacity. 
+
+If an application file is `1GB`, my computer hold at most 16 applications at once.
+
+If I open another application, the computer would need to remove an existing application from the memory before reading the new application into memory.
+
+Generally speaking the more memory you have, the more applications you can have open at once without your computer slowing down
+
+{% /sideBySide %}
+
+Once the application has been loaded into memory, the computer can start reading and executing the application instructions. 
+
+The memory read speed is about `200GB/s` (200 Gigabytes per second), about 130 times faster than the harddrive.
+
+So when your computer runs out of memory, your computer will slow to a crawl because it has to read from harddrive which is 130 times slower!
+
+The **CPU** is the brains of the computer. Whenever I say the computer can start reading and exectuting the application instructions, I actually meant the CPU can start reading and executing the application instructions.
+
+{% sideBySide %}
+
+![10 cores](http://69.181.248.93:8035/uploads/macbook-pro-cores.png)
+
+My computer has 10 core CPU.
+
+This means that my computer can have up to 10 applications running at the same time.
+
+Each core can be loading files into memory and executing the application instructions, all at the same time.
+
+{% /sideBySide %}
+
+Each CPU core on my computer is a `3.2 Gigahertz (Ghz) processor`, meaning it can process 3.2 billion instructions every second.
+
+The higher the frequency, (Ghz), the faster the CPU can execute instructions.
+
+{% sideBySide %}
+
+![vscode](http://69.181.248.93:8035/uploads/vscode.png)
+
+After VSCode has been loaded into memory and the CPU finishes running the instructions,
+the VSCode application shows up and now I can start writing my code!
+
+{% /sideBySide %}
+
+When VSCode has been loaded up and I start typing into my `zombie` file,
+everything I type is stored in the memory.
+
+{% sideBySide %}
+
+![typing code](http://69.181.248.93:8035/uploads/typing-code.png)
+
+The more I type, the more memory this file occupies
+
+The more I delete, the less memory this file occupies
+
+{% /sideBySide %}
+
+A computer's memory is divided into 2 parts:
+
+1. **Static Memory**: For holding things that do not change in size. For example, VSCode application takes up 1GB. When it is loaded into memory, it will take up only 1GB.
+2. **Heap Memory** (also known as **Dynamic Memory**): For holding things that changes in size. When I open the file `zombie` with VSCode, the file content is loaded into **Heap Memory**. The more I type, the more memory is used.
+
+My computer's memory capacity is 16GB, which means that Static Memory plus Heap Memory usage is always less than or equal to 16GB
+
+## File Size
 
 Each character in a file usually takes up 1 byte, sometimes 2 bytes.
-For example, if you write the following into a file (ignore the line numbers, they are there to help you see that there are two lines)
+For example, if I write the following into a file (ignore the line numbers, they are there to help you see that there are two lines)
 
 ```
 Hello World
@@ -98,7 +167,8 @@ How are you?
 
 the file would be a little more than 24 bytes. Don't forget that spaces and **new line** (between `World` and `How`) count as characters too!)
 
-A file can be get big. Instead of `50,000,000 bytes` we say the file is `50 megabytes`.
+As a file gets large, we use abbreviations.
+Instead of `50,000,000 bytes` we say the file is `50 megabytes`.
 Here is the conversion table:
 
 {% table %}
@@ -123,7 +193,14 @@ Here is the conversion table:
 
 After petabyte, it is Exa Byte, then Zetta Byte, then Yotta Byte. You don't have to know them.
 
-For simplicity, instead of using dividing and multiplying by 1024 when converting bytes, we usually just use 1000 because it is easier.
+If I see a file size of `123,234,978 bytes`, I'm not going to divide by `1,048,576` to get size representation in Megabytes because it is too difficult. 
+Instead, I will simply divide by `1,000,000` and say the file is `123 Megabytes(MB)`
+
+Software engineers are expected to be able to quickly approximate file sizes. 
+
+{% exercise exerciseId="approximateFileSizes" articleName=$articleName %}
+{% /exercise %}
+
 
 ## File name
 
