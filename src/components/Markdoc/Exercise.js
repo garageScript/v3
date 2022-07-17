@@ -47,14 +47,14 @@ const Requirement = ({ requiredCorrect, currentCorrect }) => {
   return <p>You need {diff} more correct answers to pass this section</p>;
 };
 
-const Solution = ({ explanation, viewed, viewSolution }) => {
+const Solution = ({ explanation, shouldDisplay, viewSolution }) => {
   const explanationComponent = useMemo(() => {
     return renderMarkdoc({
       content: explanation,
     });
   }, [explanation]);
 
-  if (!viewed) {
+  if (!shouldDisplay) {
     return (
       <div>
         <button className="btn btn-ghost" onClick={viewSolution}>
@@ -94,44 +94,37 @@ const ResultMessage = ({ result }) => {
   return "";
 };
 
-const CompletionMessage = ({
-  dismiss,
-  articleName,
-  exerciseId,
-  requiredCorrect,
-}) => {
-  if (
-    exerciseStat.getCorrectCount(articleName, exerciseId) !== requiredCorrect ||
-    exerciseStat.hasCompleted(articleName, exerciseId)
-  ) {
-    return "";
-  }
+const CompletionMessage = ({ dismiss }) => {
   return (
-    <div className="absolute top-0 bottom-0 left-0 right-0 bg-success text-success-content p-12 text-center">
-      <h1 className="text-success-content">Congratulations!</h1>
-      <p>
-        You have completed this exercise. Feel free to practice more if you
-        think you need it.{" "}
-      </p>
-      <div className="text-center mb-3">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-1/6 w-1/6 m-auto"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
+    <div className="relative card bg-base-200 shadow-xl mt-16">
+      <div className="card-body">
+        <div className="bg-success text-success-content p-12 text-center">
+          <h1 className="text-success-content">Congratulations!</h1>
+          <p>
+            You have completed this exercise. Feel free to practice more if you
+            think you need it.{" "}
+          </p>
+          <div className="text-center mb-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-1/6 w-1/6 m-auto"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <button className="btn btn-link text-neutral-focus" onClick={dismiss}>
+            Dismiss
+          </button>
+        </div>
       </div>
-      <button className="btn btn-link text-neutral-focus" onClick={dismiss}>
-        Dismiss
-      </button>
     </div>
   );
 };
@@ -205,6 +198,14 @@ export function Exercise({ exerciseId, articleName, children }) {
 
   const answerUnitComponent = answerUnit ? <span>{answerUnit}</span> : "";
 
+  const shouldShowCompletionMessage = exerciseStat.shouldShowCompletionMessage(
+    articleName,
+    exerciseId,
+    requiredCorrect
+  );
+  if (shouldShowCompletionMessage) {
+    return <CompletionMessage dismiss={dismissCompletion} />;
+  }
   return (
     <div className="relative card bg-base-200 shadow-xl mt-16">
       <div className="card-body">
@@ -244,17 +245,10 @@ export function Exercise({ exerciseId, articleName, children }) {
 
         <Solution
           explanation={explanation}
-          viewed={viewedSolution}
+          shouldDisplay={viewedSolution}
           viewSolution={viewSolution}
         />
       </div>
-
-      <CompletionMessage
-        dismiss={dismissCompletion}
-        exerciseId={exerciseId}
-        articleName={articleName}
-        requiredCorrect={requiredCorrect}
-      />
     </div>
   );
 }
@@ -283,6 +277,6 @@ Make sure public/exercises/{articleName}.cjs contains your exercise with the rel
 
 exerciseId (key), value is an object with generateQuestion that returns and object with the following:
 
-title, prompt, answerUnit, validate, requiredCorrect
+title, prompt, answerUnit?, validate, requiredCorrect, explanation
 
 */

@@ -42,4 +42,11 @@ export const exerciseStat = {
     exerciseInfo.correctCount = correctCount + 1;
     setExerciseInfo(articleName, exerciseId, exerciseInfo);
   },
+
+  shouldShowCompletionMessage: (articleName, exerciseId, requiredCorrect) => {
+    return (
+      exerciseStat.getCorrectCount(articleName, exerciseId) ===
+        requiredCorrect && !exerciseStat.hasCompleted(articleName, exerciseId)
+    );
+  },
 };
