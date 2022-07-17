@@ -25,30 +25,168 @@ This request will arrive at my modem and then end up at my computer.
 
 # Code
 
-To be able to handle your incoming request, I need to write some code to tell the computer what to do. 
-Any code that tells the computer what to do is called an **application**.
+To be able to handle your incoming request, I had to write some code to tell the computer what to do. 
+Any running code that tells the computer what to do is called an **application**. 
+I will walk you through what I did by first writing the code then running the code (and my running code is called an **application**).
 
 ![folder image](http://69.181.248.93:8035/uploads/appfolder-zombie.png)
-To write code, I created a folder called *website* (I could have named the folder whatever I wanted) and created a file inside the folder called `zombie` using a text editor (I could have named the file whatever I wanted).
+I first created a folder called *website* (I could have named the folder whatever I wanted) and created a file inside the folder called `zombie` using a text editor (I could have named the file whatever I wanted).
 The most common editor used to write code currently is [vscode](https://code.visualstudio.com/)
 
 ## Editor
-Why do you need a text editor? Why can't you just use microsoft word?
+Why do I need a text editor? Why couldn't I simply use [microsoft word](https://www.microsoft.com/en-us/microsoft-365/word)?
 
 ![microsoft word](http://69.181.248.93:8035/uploads/helloThereWord.jpg)
 The reason is that editors like Microsoft Word allows **rich text editing**, meaning you can add styles to your text by changing the font size, making it bold, setting margins, etc. 
-So if you write `Hello there! How are you doing?` into Microsoft Word and save the file as (`hello.docx`), Microsoft Word will write into `hello.docx` in a way that only Microsoft Word will understand, preserving all your text styles.
+So if you write `Hello there! How are you doing?` into Microsoft Word and save the file (`hello.docx`), Microsoft Word will write into `hello.docx` in a way that only Microsoft Word will understand, preserving all your text styles.
 
 ![microsoft word output](http://69.181.248.93:8035/uploads/helloThereTxt.jpg)
-The content that gets saved into `hello.docx` file actually looks like the above. Gibberish that only Microsoft Word understands. 
+The content that gets saved into `hello.docx` file actually looks like the above; Gibberish that only Microsoft Word understands. 
 
 Unlike rich text editors like Microsoft Word, a text editor like [vscode](https://code.visualstudio.com/) will contain exactly what you write.
-So if I wrote `Hello there! How are you doing?` and save, the file will contain exactly `Hello there! How are you doing?`.
+If I wrote `Hello there! How are you doing?` using vscode and save, the file will contain exactly `Hello there! How are you doing?`.
+
+
+{% exercise exerciseId="biggerFileSize" articleName=$articleName %}
+{% /exercise %}
+
+
+## File name
+
+![folder image](http://69.181.248.93:8035/uploads/appfolder-zombie.png)
+To write code, I created a folder called *website* and created a file inside the folder called `zombie` using a text editor.
+
+Using vscode, I open the file `zombie` and write some code.
+
+```
+const a = require("http");
+
+const b = `
+  <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+  <article>
+  <h1>What's just happened!?</h1>
+  <p>What happened when you put a <strong>url</strong> (i.e <code>69.181.248.93:8035</code>) into the url bar and hit &quot;enter&quot;?</p>
+  <h2>Receiving Your Request on Device</h2>
+  ...
+  </article>
+`
+
+const c = function (req, res) {
+  res.send(b)
+};
+
+const d = http.createServer(c);
+
+server.listen(3035)
+```
+
+As an seasoned software engineer, I feel uncomfortable when I look at the code above.
+Every character looks the same and it makes the code very difficult to read.
+
+This is because vscode does not know what kind of file `zombie` is. 
+
+You should always put a **file extension** to a file to tell the application what type of file it is.
+In this case, our code is **JavaScript** so we should rename the file to `zombie.js`.
+
+Now when you open the file `zombie.js` with vscode, vscode will look at the file extension (`.js`) and determine that the file contains JavaScript code.
+It will then display the code to you in a way that would make it easier for you to read.
+
+```js
+const a = require("http");
+
+const b = `
+  <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+  <article>
+  <h1>What's just happened!?</h1>
+  <p>What happened when you put a <strong>url</strong> (i.e <code>69.181.248.93:8035</code>) into the url bar and hit &quot;enter&quot;?</p>
+  <h2>Receiving Your Request on Device</h2>
+  ...
+  </article>
+`
+
+const c = function (req, res) {
+  res.send(b)
+};
+
+const d = http.createServer(c);
+
+server.listen(3035)
+```
+
+It is generally expected that you should always put a file extension when you work with files.
+The generally expected way to do things is called **Best Practice**.
+
+For the rest of this curriculum, I will start with the "wrong" way to do things, then fix it to follow best practice to help you understand the best practices we follow in the industry.
+
+It is best practice to name your files according to its functionality.
+
+Since our code has nothing to do with zombies, `zombie.js` is a terrible file name. 
+
+Let's rename our code to `server.js`. 
+
+You will understand why we named the file `server.js` after you understand the code.
+
+# Application
+
+The best way to understand the code above is to run the code and go through the code line by line like a computer.
+
+[Node.js](https://nodejs.org/en/) is an application that can run JavaScript code. 
+I use `Node.js` to run my JavaScript file `server.js` by typing `node server.js` into the terminal. 
+
+
+{% slideShow  %}
+
+# slide
+
+```js
+data-line|1-2, 4, 11-15;
+const a = require("http");
+const b = `
+  <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+  <article>
+  <h1>What's just happened!?</h1>
+  <p>What happened when you put a <strong>url</strong> (i.e <code>69.181.248.93:8035</code>) into the url bar and hit &quot;enter&quot;?</p>
+  <h2>Receiving Your Request on Device</h2>
+  ...
+  </article>
+`;
+
+const c = function (req, res) {
+  res.send(b)
+};
+
+const d = http.createServer(c);
+
+server.listen(3035)
+```
+
+---
+
+
+taheouteo
+
+{% /slideShow  %}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Files and sizes
-Now that you understand why we write code in a text editor, let's talk about file sizes!
+When you write into a file and save the file, the file will be saved on your harddrive.
 
-Each character in a file takes up 1-2 bytes, most of them 1 byte.
+If you create a file using a text editor, each character in a file usually takes up 1 bytes, sometimes 2 bytes.
 For example, if you write the following into a file (ignore the line numbers, they are there to help you see that there are two lines)
 
 ```
@@ -86,35 +224,6 @@ After petabyte, it is Exa Byte, then Zetta Byte, then Yotta Byte. You don't have
 For simplicity, instead of using dividing and multiplying by 1024 when converting bytes, we usually just use 1000 because it is easier.
 
 
-
-## Editor
-To write code, you 
-
-
-
-
-```js
-const http = require("http");
-
-const htmlString = `
-  <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
-  <article>
-  <h1>What's just happened!?</h1>
-  <p>What happened when you put a <strong>url</strong> (i.e <code>69.181.248.93:8035</code>) into the url bar and hit &quot;enter&quot;?</p>
-  <h2>Receiving Your Request on Device</h2>
-  ...
-  </article>
-`
-
-const requestListener = function (req, res) {
-  res.send(htmlString)
-};
-
-const server = http.createServer(requestListener);
-
-server.listen(3035)
-```
 
 
 

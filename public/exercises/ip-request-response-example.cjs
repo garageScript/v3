@@ -79,9 +79,56 @@ ${portExplanation}
       };
     },
   },
-  biggerFileName: {
+  biggerFileSize: {
     generateQuestion: () => {
-      return {};
+      const fileName = `file${Date.now() % 1000}`;
+
+      const options = [
+        "You put the above text into Microsoft Word and save the file as `" +
+          fileName +
+          ".docx`",
+        "You put the above text into VSCode and save the file as `" +
+          fileName +
+          ".txt`",
+      ];
+      let firstOption;
+      if (Math.floor(Math.random() * 2)) {
+        firstOption = options.pop();
+      } else {
+        firstOption = options.shift();
+      }
+
+      return {
+        title: "Bigger File Size",
+        prompt: `
+
+\`\`\`
+    Did you know? Random text is called Ipsum Lorem
+    Ipsum Lorem is a bunch of random text words 
+    that has no meaning. 
+    It is primarily used for design
+\`\`\`
+
+
+${firstOption}
+
+${options[0]}
+
+Which file is smaller?
+        `,
+        validate: (submission) => {
+          return submission.trim() === `${fileName}.txt`;
+        },
+        explanation: `
+Microsoft Word needs to store additional information about your text to preserve rich text formatting.
+
+A text editor like VSCode will only save exactly what you typed in
+
+Therefore, a rich text editor like Microsoft Word will always need to store more data.
+
+        `,
+        requiredCorrect: 2,
+      };
     },
   },
 };
