@@ -207,7 +207,7 @@ export function Exercise({ exerciseId, articleName, children }) {
     return <CompletionMessage dismiss={dismissCompletion} />;
   }
   return (
-    <div className="relative card bg-base-200 shadow-xl mt-16">
+    <div className="relative card bg-base-200 shadow-xl mt-16 mb-16">
       <div className="card-body">
         <h3 className="card-title">Exercise: {title}</h3>
         {promptComponent}
