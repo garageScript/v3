@@ -280,4 +280,9 @@ export const exercise = {
 
 
 Make sure public/exercises/{articleName}.cjs contains your exercise with the relevant info
+
+exerciseId (key), value is an object with generateQuestion that returns and object with the following:
+
+title, prompt, answerUnit, validate, requiredCorrect
+
 */

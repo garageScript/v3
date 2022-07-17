@@ -12,7 +12,11 @@ files.forEach((f) => {
   }
 
   const content = fs.readFileSync(`./public/exercises/${f}`).toString();
-  exerciseStringList[f.split(".")[0]] = content;
+  const contentArr = content.split("\n");
+  contentArr.shift(); // to remove module.exports =
+  const contentObjStr = `{${contentArr.join("\n")}`;
+
+  exerciseStringList[f.split(".")[0]] = contentObjStr;
 });
 
 module.exports = exerciseStringList;
