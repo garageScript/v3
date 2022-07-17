@@ -69,3 +69,41 @@ export function SlideShow({ children }) {
 export const slideShow = {
   render: "SlideShow",
 };
+
+/* Example
+
+{% slideShow %}
+
+# slide
+{% sideBySide %}
+
+{% mermaid %}
+graph LR
+A[Your Computer] -->|1. Prepares and sends a request| B(Modem)
+{% /mermaid %}
+
+---
+
+The protocol is `http` and the browser prepares a request to be sent out.
+As part of the http protocol, the request will contain 2 fields:
+1. Destination: Where the request is going to, which is my ip address: **{% $myIp %}:{% $externalPort %}**
+2. Source: Where the request is coming from, which is your ip address:  **{% $reqIp %}**
+{% /sideBySide %}
+
+# slide
+
+# Hello world 
+
+slide 2
+
+# slide
+
+
+```js
+// js code block 
+// slide 3
+```
+
+{% /slideShow %}
+
+*/
