@@ -51,8 +51,9 @@ export function SlideShow({ children }) {
   };
 
   return (
-    <div>
+    <div className="shadow-xl p-2">
       {currentSlide}
+      <div className="divider divider-vertical"></div>
       <div className="flex w-full">
         <div className="w-full text-center">
           <LeftButton onClick={goLeft} currentId={slideId} slides={slides} />
