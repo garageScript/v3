@@ -2,7 +2,7 @@ import * as React from "react";
 
 export function Toggle({ summary, children }) {
   return (
-    <details className="alert shadow-lg">
+    <details className="shadow-xl p-2">
       <summary>{summary}</summary>
       {children}
     </details>
