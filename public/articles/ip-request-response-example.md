@@ -23,7 +23,7 @@ D --> E(My Computer)
 After putting **{% $myIp %}:{% $externalPort %}** into the url bar, the browser will create a request and send it out to the ip address *{% $myIp %}*.
 This request will arrive at my modem and then end up at my computer.
 
-# Code
+# Writing Code
 
 To be able to handle your incoming request, I had to write some code to tell the computer what to do. 
 Any running code that tells the computer what to do is called an **application**. 
@@ -33,7 +33,7 @@ I will walk you through what I did by first writing the code then running the co
 I first created a folder called *website* (I could have named the folder whatever I wanted) and created a file inside the folder called `zombie` using a text editor (I could have named the file whatever I wanted).
 The most common editor used to write code currently is [vscode](https://code.visualstudio.com/)
 
-## Editor
+# Editor
 Why do I need a text editor? Why couldn't I simply use [microsoft word](https://www.microsoft.com/en-us/microsoft-365/word)?
 
 ![microsoft word](http://69.181.248.93:8035/uploads/helloThereWord.jpg)
@@ -50,21 +50,21 @@ If I wrote `Hello there! How are you doing?` using vscode and save, the file wil
 {% exercise exerciseId="biggerFileSize" articleName=$articleName %}
 {% /exercise %}
 
-## CPU, Memory, and Hard Drive
+# CPU, Memory, and Hard Drive
 
 Before using [vscode](https://code.visualstudio.com/), I had to install vscode into my computer.
 
 What does it mean to install vscode? 
-Installing vscode means that the computer is taking all the files needed to run vscode and storing it in my **harddrive**.
+Installing vscode means that the computer is taking all the files needed to run vscode and storing it in my **hard drive**.
 
-A **harddrive** stores files. All the applications in your computer (your browser, your music player, etc) are files on your harddrive. 
-**Writing to drive** is the technical term for saying that the computer is saving a file to harddrive
+A **hard drive** stores files. All the applications in your computer (your browser, your music player, etc) are files on your hard drive. 
+**Writing to drive** is the technical term for saying that the computer is saving a file to hard drive
 
 {% sideBySide %}
 
 ![512 GB hd](http://69.181.248.93:8035/uploads/macbook-pro-hd.png)
 
-My harddrive has `512GB` capacity. 
+My hard drive has `512GB` capacity. 
 
 GB stands for **Gigabytes**.
 
@@ -72,7 +72,7 @@ GB stands for **Gigabytes**.
 
 If a file is `1GB`, my computer can at most 512 copies of that file
 
-Generally, an SSD (a type of harddrive that my computer has) can write about 1.5GB per second
+Generally, an SSD (a type of hard drive that my computer has) can write about 1.5GB per second
 
 {% /sideBySide %}
 
@@ -104,9 +104,9 @@ Generally speaking the more memory you have, the more applications you can have 
 
 Once the application has been loaded into memory, the computer can start reading and executing the application instructions. 
 
-The memory read speed is about `200GB/s` (200 Gigabytes per second), about 130 times faster than the harddrive.
+The memory read speed is about `200GB/s` (200 Gigabytes per second), about 130 times faster than the hard drive.
 
-So when your computer runs out of memory, your computer will slow to a crawl because it has to read from harddrive which is 130 times slower!
+So when your computer runs out of memory, your computer will slow to a crawl because it has to read from hard drive which is 130 times slower!
 
 The **CPU** is the brains of the computer. Whenever I say the computer can start reading and exectuting the application instructions, I actually meant the CPU can start reading and executing the application instructions.
 
@@ -136,7 +136,8 @@ the VSCode application shows up and now I can start writing my code!
 {% /sideBySide %}
 
 When VSCode has been loaded up and I start typing into my `zombie` file,
-everything I type is stored in the memory.
+everything I type is stored in the memory. 
+When you save the file, the contents of the file in memory is written into disk. 
 
 {% sideBySide %}
 
@@ -155,7 +156,7 @@ A computer's memory is divided into 2 parts:
 
 My computer's memory capacity is 16GB, which means that Static Memory plus Heap Memory usage is always less than or equal to 16GB
 
-## File Size
+# File Size
 
 Each character in a file usually takes up 1 byte, sometimes 2 bytes.
 For example, if I write the following into a file (ignore the line numbers, they are there to help you see that there are two lines)
@@ -201,11 +202,254 @@ Software engineers are expected to be able to quickly approximate file sizes.
 {% exercise exerciseId="approximateFileSizes" articleName=$articleName %}
 {% /exercise %}
 
+# Binary Numbers
 
-## File name
+When converting file sizes, why divide and multiply by such strange numbers like `1024`, `1,048,576`, etc?
+
+Why not divide by `1000`, `1,000,000` instead to make it easier?
+
+To understand why, you must first understand binary numbers.
+Binary numbers mean that you can only use `0` and `1`.
+
+In a computer, all information (including numbers) are stored as binary numbers in the computer. 
+This is because the electronics that make up a computer are essentially billions of **transistors**, which are tiny switches that activations when electricity flows through it. 
+Active state is `1` and inactive state is `0`.
+
+{% toggle summary="Fun fact: In the past, cosmic rays from space can hit a computer and cause electricity to flow in the CPU or Memory (resulting in a 1 instead of a 0). This have caused some very unexpected issues." %}
+[YouTube Video](https://www.youtube.com/watch?v=AaZ_RSt0KP8) explains this concept. This is no longer an issue because all electronics in the present will have a coating layer to protect it from cosmic rays.
+{% /toggle %}
+
+## Counting
+In order to count in binary, you should first understand the algorithm behind counting.
+
+{% slideShow %}
+
+# slide
+
+First we count using the digits `0-9`:
+
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+
+These are all one-digit number.
+
+# slide
+ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9
+
+Once we have used up all the digits in the one-digit number, we just continue to two-digit number.
+
+Increment the first digit (if there is no first digit, imagine a `0` as the first digit) and start counting again
+
+10, 11, 12, 13, 14, 15, 16, 17, 18, 19
+
+Increment the first digit and start counting again
+
+20, 21, 22, 23, 24, 25, 26, 27, 28, 29
+
+Increment the first digit and start counting again
+
+...
+
+90, 91, 92, 93, 94, 95, 96, 97, 98, 99
+
+# slide
+
+90, 91, 92, 93, 94, 95, 96, 97, 98, 99
+
+Once we have used up all the digits in the two-digit number, we just continue to three-digit number.
+
+Increment the first digit (if there is no first digit, imagine a `0` as the first digit) and start counting again
+
+100, 101, 102, ... , 198, 199
+
+Increment the first digit and start counting again
+
+200, 201, 202, ... , 298, 299
+
+Increment the first digit and start counting again
+
+...
+
+900, 901, 902, ... , 998, 999
+
+# slide
+
+900, 901, 902, ... , 998, 999
+
+Once we have used up all the digits in the three-digit number, we just continue to four-digit number.
+
+Increment the first digit (if there is no first digit, imagine a `0` as the first digit) and start counting again
+
+1000, 1001, 1002, ... , 1998, 1999
+
+Increment the first digit and start counting again
+
+2000, 2001, 2002, ... , 2998, 2999
+
+Increment the first digit and start counting again
+
+...
+
+9000, 9001, 9002, ... 9998, 9999
+
+# slide
+
+9000, 9001, 9002, ... 9998, 9999
+
+Once we have used up all the digits in the four-digit number, we just continue to five-digit number.
+
+Increment the first digit (if there is no first digit, imagine a `0` as the first digit) and start counting again
+
+10000, 10001, 10002, ..., 19998, 19999
+
+Increment the first digit and start counting again
+
+20000, 20001, 20002, ... , 29998, 29999
+
+Increment the first digit and start counting again
+
+...
+
+90000, 90001, 90002, ... 99998, 99999
+
+# slide
+
+90000, 90001, 90002, ... 99998, 99999
+
+Once we have used up all the digits in the five-digit number, we just continue to six-digit number.
+
+Increment the first digit (if there is no first digit, imagine a `0` as the first digit) and start counting again
+
+100000, 100001, 100002, ..., 199998, 199999
+
+Increment the first digit and start counting again
+
+200000, 200001, 200002, ... , 299998, 299999
+
+Increment the first digit and start counting again
+
+...
+
+900000, 900001, 900002, ... 999998, 999999
+
+... And so on ...{% .text-center %}
+{% /slideShow %}
+
+{% exercise exerciseId="binaryCount" articleName=$articleName %}
+{% /exercise %}
+
+A series of transistors can be used to represent a binary number.
+
+For example, let's say you have 5 transistors and the first 4 are in an active state (meaning electricity is flowing through them), you have the binary number: `11110`
+
+The number of transistors corresponds to the number of digits in the binary number system.
+
+Here's a table showing the number of binary digits and how many numbers they can represent
+{% table %}
+* Number of digits
+* Numbers that can be represented
+* Explanation
+---
+* 1
+* 2
+* A transistor could be off or on (0, 1)
+---
+* 2
+* 4
+* 00, 01, 10, 11
+---
+* 3
+* 8
+* 000, 001, 010, 011, 100, 101, 110, 111
+---
+* 4
+* 16
+* 0000, 0001, ... 1111
+---
+* 5
+* 32
+* 00000, 00001, ... 11111
+---
+* 6
+* 64
+* 000000, 000001, ... 111111
+---
+* 7
+* 128
+* 0000000 - 1111111
+---
+* 8
+* 256
+* 00000000 - 11111111
+---
+* 9
+* 512
+* 000000000 - 111111111
+---
+* 10
+* 1024
+* 0000000000 - 1111111111
+---
+* ...
+* ...
+* ...
+---
+* 20
+* 1,048,576
+* ...
+---
+* ...
+* ...
+* ...
+---
+* 30
+* 1,073,741,824
+* ...
+---
+* ...
+* ...
+* ...
+---
+* 40
+* 1,099,511,627,776 
+* ...
+---
+* ...
+* ...
+* ...
+---
+* 50
+* 1,125,899,906,842,624
+* ...
+{% /table %}
+
+The general formula is 2 ^ number of digits gives you the amount of possible numbers that can be represented by that number of binary digits.
+
+Your memory and hard drive capacity directly correlates to how many transistors they can contain.
+This is why memory sizes and hard drive sizes always corresponds to number of binary digits: 2GB, 4GB, 8GB, 16GB, 32GB, 64GB, 128GB, 256GB, 512GB, etc.
+
+Since your computer is made up of transistors, it is easier for computer to work with numbers that are exponents of 2. This is why when converting file sizes, the computer divides and multiplies by numbers like 1024, 1,048,576, etc.
+
+{% toggle summary="Trivia: A king is throwing a big festival and has 1000 barrels of wine. An intruder poisoned exactly one of the barrel. Anyone who drinks from the poisoned barrel will die in 24 hours. The festival is in 44 hours and the King can sacrifice up to 10 prisoners. How does the king figure out which barrel of wine is poisoned?" %}
+
+First line up the barrel and number them 0-1000.
+
+Line up the 10 prisoners: ABCDEFGHIJ
+
+For each of the barrel, the prisoners must drink from it according to the binary number of the barrel. 
+
+For example, the 38th barrel (Binary `0000100110`), prisoner EHI will drink.
+
+After 24 hours, the prisoners that died will reflect the binary number of the barrel that was poisoned.
+
+For example, if prisoners DGHJ died, barrel `0001001101` (77) is poisoned
+{% /toggle %}
+
+# File name
+
+Now that you understand your computer and what happens when you create a file, let's continue writing some code to tell the computer how to handle your incoming request.
 
 ![folder image](http://69.181.248.93:8035/uploads/appfolder-zombie.png)
-To write code, I created a folder called *website* and created a file inside the folder called `zombie` using a text editor.
+To write code, I created a folder called `website` and created a file inside the folder called `zombie` using a text editor.
 
 Using vscode, I open the file `zombie` and write some code.
 
@@ -229,7 +473,7 @@ const c = function (req, res) {
 
 const d = http.createServer(c);
 
-server.listen(3035)
+server.listen(8035)
 ```
 
 As an seasoned software engineer, I feel uncomfortable when I look at the code above.
@@ -263,7 +507,7 @@ const c = function (req, res) {
 
 const d = http.createServer(c);
 
-server.listen(3035)
+server.listen(8035)
 ```
 
 It is generally expected that you should always put a file extension when you work with files.
@@ -283,41 +527,81 @@ You will understand why we named the file `server.js` after you understand the c
 
 The best way to understand the code above is to run the code and go through the code line by line like a computer.
 
-[Node.js](https://nodejs.org/en/) is an application that can run JavaScript code. 
-I use `Node.js` to run my JavaScript file `server.js` by typing `node server.js` into the terminal. 
+[NodeJS](https://nodejs.org/en/) is an application that can run JavaScript code. 
+After installing it, I run the code I wrote by typing `node server.js` into the terminal. 
+
+When I execute `node server.js`, NodeJS will get the file `server.js` from the hard disk and load it into memory. 
+Once the file is in memory, NodeJS will start reading and executing it line by line.
+
+In each line, the computer reads from left to right
 
 
 {% slideShow  %}
 
 # slide
+{% sideBySide %}
+
+**Line 1**
+
+`const a = `  
+creates a **variable** called `a`. Variable stores information. Everything to the right of `=` is going to be stored into variable `a`
+
+`require`  
+`require` is a function that NodeJS understands. A **function** is a list of instructions. 
+
+`require("http")`  
+The parenthesis `()` immediately after the function tells NodeJS to **execute** the function.  
+Everything inside the parenthesis is called an **argument**. 
+Arguments are information passed into a function to help with its execution.
+
+`"http"` is a string. A string is a bunch af characters with no meaning. This is passed into the `require` function as **an argument**.
+
+The result of a function is called the **return value**. 
+When `require` runs, it is looks for a 
+
+
+---
 
 ```js
-data-line|1-2, 4, 11-15;
+data-line|1;
 const a = require("http");
 const b = `
-  <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
-  <article>
-  <h1>What's just happened!?</h1>
-  <p>What happened when you put a <strong>url</strong> (i.e <code>69.181.248.93:8035</code>) into the url bar and hit &quot;enter&quot;?</p>
-  <h2>Receiving Your Request on Device</h2>
-  ...
-  </article>
+<article>
+
+<h1>
+What just happened!?
+</h1>
+
+<p>
+What happened when 
+you put a url
+
+<code>
+69.181.248.93:8035
+</code>
+
+into the url bar
+and hit enter?
+
+</p>
+
+<h2>Receiving Request </h2>
+
+...
+
+</article>
 `;
 
-const c = function (req, res) {
-  res.send(b)
+const c = function (q, s) {
+  s.send(b)
 };
 
-const d = http.createServer(c);
+const d = a.createServer(c);
 
 server.listen(3035)
 ```
 
----
-
-
-taheouteo
+{% /sideBySide %}
 
 {% /slideShow  %}
 

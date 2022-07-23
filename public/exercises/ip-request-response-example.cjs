@@ -298,4 +298,100 @@ You ${actionStr} \`${givenSizeWithCommas}\` by \`${addCommas(unitDiffValue)}\`
       };
     },
   },
+  binaryCount: {
+    generateQuestion: () => {
+      if (!window.binaryCount && window.binaryCount !== 0) {
+        window.binaryCount = -1;
+      }
+      window.binaryCount += 1;
+      let count = window.binaryCount;
+      let previousTable = "";
+      if (count) {
+        previousTable = new Array(count).fill(0).reduce(
+          (acc, _, i) => {
+            return (
+              acc +
+              `
+---
+* ${i}
+* ${i.toString(2)}
+            `
+            );
+          },
+          `
+{% table %}
+* Num
+* Binary
+        `
+        );
+        previousTable += `
+{% /table %}
+---
+        `;
+      }
+
+      let explanation = "";
+      if (count === 0) {
+        explanation = `0 is 0 all counting systems, including binary`;
+      } else {
+        const previousNumber = count - 1;
+        const previousNumberInBinary = previousNumber.toString(2);
+        const numDigits = previousNumberInBinary.length;
+
+        explanation = `${previousNumber} in binary is ${previousNumberInBinary}. To add to this:`;
+
+        const zeroIndex = previousNumberInBinary
+          .split("")
+          .reverse()
+          .findIndex((c) => c === "0");
+
+        if (zeroIndex < 0) {
+          explanation += `
+
+Since we have used up all the digits (0 and 1) in the ${numDigits}-digit number, we just continue to ${
+            numDigits + 1
+          }-digit number.
+
+Increment the first digit (imagine a 0 as the first digit) and set the rest to 0
+          `;
+        } else if (zeroIndex === 0) {
+          explanation += `
+
+Simply add 1
+          `;
+        } else {
+          const substring = previousNumberInBinary.substring(
+            numDigits - 1 - zeroIndex
+          );
+          const substringNum = parseInt(substring, 2);
+          const incrementedNum = substringNum + 1;
+          explanation += `
+
+We have seen ${substring} (${substringNum}) before.
+
+${substring} + 1 is \`${incrementedNum.toString(
+            2
+          )}\` (By incrementing the first digit and setting the rest to 0)
+          `;
+        }
+
+        explanation += `
+
+Answer: ${count.toString(2)}
+        `;
+      }
+      return {
+        title: "Counting In Binary",
+        prompt: `
+${previousTable}
+What is ${count} in Binary?
+        `,
+        requiredCorrect: 20,
+        validate: (submission) => {
+          return parseInt(submission, 2) === count;
+        },
+        explanation,
+      };
+    },
+  },
 };
