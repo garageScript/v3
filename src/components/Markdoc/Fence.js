@@ -29,6 +29,7 @@ export function CodeBlock({ children, language }) {
         const [property, ...restArr] = chunk.split("|");
         dataAttributes[property] = restArr.join("|");
       });
+    content = childrenLines.join("\n");
   }
 
   return (
